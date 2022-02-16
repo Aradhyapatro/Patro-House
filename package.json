@@ -1,0 +1,14 @@
+{
+  "name": "patro-house",
+  "version": "1.0.0",
+  "description": "Complete End-to-End E-commerce Application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aradhya Patro a.k.a Arya",
+  "license": "ISC",
+  "dependencies": {
+    "create-react-app": "^5.0.0"
+  }
+}

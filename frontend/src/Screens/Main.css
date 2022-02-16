@@ -1,0 +1,9 @@
+.main {
+  height: 75vh;
+}
+
+.card:hover {
+  box-shadow: 24px 18px 17px -10px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 24px 18px 17px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 24px 18px 17px -10px rgba(0, 0, 0, 0.75);
+}
