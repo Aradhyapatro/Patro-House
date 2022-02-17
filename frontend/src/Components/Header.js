@@ -13,7 +13,7 @@ const Header = () => {
               <i className="fa-solid fa-cart-shopping p-2"></i>Cart
             </Nav.Link>
             <Nav.Link href="#">
-              <i class="fa-solid fa-user p-2"></i>Sign Up
+              <i className="fa-solid fa-user p-2"></i>Sign Up
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
