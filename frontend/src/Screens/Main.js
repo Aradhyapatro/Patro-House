@@ -1,11 +1,24 @@
-import React from "react";
 import "./Main.css";
-import { Link } from "react-router-dom";
-import { Container, Row, Col, Card, Image } from "react-bootstrap";
+import axios from "axios";
 import products from "../products";
+import { Link } from "react-router-dom";
 import Rating from "../Components/Rating";
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 const Main = () => {
+  const [prod, setProd] = useState({});
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get("/api/products");
+      setProd(data);
+      console.log(typeof prod);
+    };
+
+    fetch();
+  }, []);
+
   return (
     <Container>
       <Row>

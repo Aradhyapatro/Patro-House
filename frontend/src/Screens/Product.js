@@ -1,15 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import products from "../products";
-import {
-  Image,
-  Row,
-  Col,
-  Button,
-  ListGroup,
-  Container,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Image, Row, Col, Button, ListGroup, Container } from "react-bootstrap";
 import Rating from "../Components/Rating";
 
 const Product = () => {

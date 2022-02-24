@@ -2,6 +2,14 @@
   height: 75vh;
 }
 
+.card {
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
 .card:hover {
   box-shadow: 24px 18px 17px -10px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 24px 18px 17px -10px rgba(0, 0, 0, 0.75);
