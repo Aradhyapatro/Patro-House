@@ -1,8 +1,8 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
 import products from "../products";
-import { Image, Row, Col, Button, ListGroup, Container } from "react-bootstrap";
 import Rating from "../Components/Rating";
+import { useParams, Link } from "react-router-dom";
+import { Image, Row, Col, Button, ListGroup, Container } from "react-bootstrap";
 
 const Product = () => {
   const url = useParams();

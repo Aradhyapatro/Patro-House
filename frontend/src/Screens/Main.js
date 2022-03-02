@@ -1,53 +1,31 @@
 import "./Main.css";
 import axios from "axios";
-import products from "../products";
+// import products from "../products";
+import Item from "../Components/Item";
 import { Link } from "react-router-dom";
 import Rating from "../Components/Rating";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
 const Main = () => {
-  const [prod, setProd] = useState({});
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetch = async () => {
-      const { data } = await axios.get("/api/products");
-      setProd(data);
-      console.log(typeof prod);
-    };
-
+    async function fetch() {
+      const { data } = await axios.get("http://localhost:5000/api/products");
+      console.log(data);
+      setProducts(data);
+    }
     fetch();
   }, []);
 
   return (
     <Container>
       <Row>
-        {products.map((product) => {
+        {products.map((product, index) => {
           return (
-            <Col className="col-md-6 col-lg-4">
-              <Card key={product._id} className="m-3 card">
-                <Link to={`/products/${product._id}`}>
-                  <Card.Img
-                    src={`./${product.image}`}
-                    className="img-fluid"
-                    alt={product.name}
-                  ></Card.Img>
-                </Link>
-                <Card.Body>
-                  <Link to={`/${product._id}`} style={{ all: "unset" }}>
-                    <Card.Title>{product.name}</Card.Title>
-                  </Link>
-
-                  <Rating
-                    rating={product.rating}
-                    review={product.numReviews}
-                    color="red"
-                  />
-                  <Card.Text>
-                    <h4> ₹{product.price}</h4>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+            <Col xl={3} lg={4} md={6} sm={12} key={index}>
+              <Item product={product} />
             </Col>
           );
         })}

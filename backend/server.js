@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const products = require("./data/products");
+const cors = require("cors");
+
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("API End Point Working");
@@ -11,12 +15,10 @@ app.get("/api/products", (req, res) => {
 });
 
 app.get("/api/products/:id", (req, res) => {
-  const data = req.params.id;
-  const item = products.find((element) => element._id === data);
-  console.log(item);
+  const item = products.find((element) => element._id === req.params.id);
   res.json(item);
 });
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(5000, () => {
   console.log("API SERVER running");
 });

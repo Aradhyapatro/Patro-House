@@ -1,7 +1,7 @@
-import Footer from "./Components/Footer";
-import Header from "./Components/Header";
 import Main from "./Screens/Main";
 import Product from "./Screens/Product";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
