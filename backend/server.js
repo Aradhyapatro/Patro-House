@@ -3,6 +3,7 @@ import express from "express";
 import products from "./data/products.js";
 import cors from "cors";
 import db from "./config/db.js";
+import colors from "colors";
 
 const app = express();
 dotenv.config();
@@ -29,6 +30,7 @@ app.post("/testing", () => {
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(
-    `API SERVER running ${process.env.NODE_ENVIRONMENT} environment at port = ${process.env.PORT}`
+    `  API SERVER running ${process.env.NODE_ENVIRONMENT} environment at port = ${process.env.PORT}  `
+      .blue.bgYellow.bold
   );
 });

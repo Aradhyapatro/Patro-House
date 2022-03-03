@@ -20,17 +20,19 @@ const Main = () => {
   }, []);
 
   return (
-    <Container>
-      <Row>
-        {products.map((product, index) => {
-          return (
-            <Col xl={3} lg={4} md={6} sm={12} key={index}>
-              <Item product={product} />
-            </Col>
-          );
-        })}
-      </Row>
-    </Container>
+    <>
+      <Container>
+        <Row>
+          {products.map((product, index) => {
+            return (
+              <Col xl={3} lg={4} md={6} sm={12} key={index}>
+                <Item product={product} />
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+    </>
   );
 };
 

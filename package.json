@@ -13,6 +13,7 @@
   "author": "Aradhya Patro a.k.a Arya",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "create-react-app": "^5.0.0",
