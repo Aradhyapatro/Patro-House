@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# MongoDB
+MONGO_DB=mongodb+srv://aradhyapatro:9xpgEPuGtjvfEHzj@patro-cluster.plw8k.mongodb.net/products?retryWrites=true&w=majority
+
 # dependencies
 /node_modules
 node_modules/

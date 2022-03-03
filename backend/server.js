@@ -2,11 +2,13 @@ import dotenv from "dotenv";
 import express from "express";
 import products from "./data/products.js";
 import cors from "cors";
+import db from "./config/db.js";
 
 const app = express();
+dotenv.config();
 app.use(express.json());
 app.use(cors());
-dotenv.config();
+db();
 
 app.get("/", (req, res) => {
   res.send("API End Point Working");
