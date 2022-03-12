@@ -4,8 +4,9 @@ import products from "./data/products.js";
 import cors from "cors";
 import db from "./config/db.js";
 import colors from "colors";
-
 const app = express();
+
+// middleware
 dotenv.config();
 app.use(express.json());
 app.use(cors());

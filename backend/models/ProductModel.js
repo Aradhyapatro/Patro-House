@@ -32,7 +32,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    categories: {
+    category: {
       type: String,
       required: true,
     },
@@ -52,7 +52,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    reviews: [reviews],
+    reviews: [reviewSchema],
   },
   { timestamps: true }
 );
