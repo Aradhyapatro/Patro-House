@@ -4,6 +4,7 @@ import products from "./data/products.js";
 import cors from "cors";
 import db from "./config/db.js";
 import colors from "colors";
+import productRoutes from "./routes/ProductRoutes.js";
 const app = express();
 
 // middleware
@@ -12,17 +13,10 @@ app.use(express.json());
 app.use(cors());
 db();
 
+app.use("/api/products", productRoutes);
+
 app.get("/", (req, res) => {
   res.send("API End Point Working");
-});
-
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const item = products.find((element) => element._id === req.params.id);
-  res.json(item);
 });
 
 app.listen(process.env.PORT || 5000, () => {
