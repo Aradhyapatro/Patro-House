@@ -5,6 +5,7 @@ import cors from "cors";
 import db from "./config/db.js";
 import colors from "colors";
 import productRoutes from "./routes/ProductRoutes.js";
+import { notFound, errorhandler } from "./middleware/ErrorHandlerMiddleware.js";
 const app = express();
 
 // middleware
@@ -12,6 +13,9 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 db();
+
+app.use(notFound);
+app.use(errorhandler);
 
 app.use("/api/products", productRoutes);
 

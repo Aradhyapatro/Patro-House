@@ -5,7 +5,7 @@ const router = express.Router();
 
 // @desc   gets all the products data
 // @access public
-// @api    /api/products/
+// @api    GET /api/products/
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -16,12 +16,18 @@ router.get(
 
 // @desc   get a product by the id given in the params
 // @access public
-// @api    /api/products/:id
+// @api    GET /api/products/:id
 router.get(
   "/:id",
   asyncHandler(async (req, res) => {
     const item = await products.findById(req.params.id);
-    res.json(item);
+
+    if (item) {
+      res.json(item);
+    } else {
+      res.status(404);
+      throw new Error("Page not Found");
+    }
   })
 );
 
