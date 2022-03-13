@@ -25,10 +25,6 @@ app.get("/api/products/:id", (req, res) => {
   res.json(item);
 });
 
-app.post("/testing", () => {
-  console.log("Testing successfull");
-});
-
 app.listen(process.env.PORT || 5000, () => {
   console.log(
     `  API SERVER running ${process.env.NODE_ENVIRONMENT} environment at port = ${process.env.PORT}  `
