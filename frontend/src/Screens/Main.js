@@ -1,11 +1,9 @@
 import "./Main.css";
 import axios from "axios";
-// import products from "../products";
+import products from "../products";
 import Item from "../Components/Item";
-import { Link } from "react-router-dom";
-import Rating from "../Components/Rating";
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Main = () => {
   const [products, setProducts] = useState([]);

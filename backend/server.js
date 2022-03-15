@@ -14,10 +14,9 @@ app.use(express.json());
 app.use(cors());
 db();
 
+app.use("/api/products", productRoutes);
 app.use(notFound);
 app.use(errorhandler);
-
-app.use("/api/products", productRoutes);
 
 app.get("/", (req, res) => {
   res.send("API End Point Working");
