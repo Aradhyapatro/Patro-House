@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import products from "../products";
 import Rating from "../Components/Rating";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,15 +10,10 @@ import { Image, Row, Col, Button, ListGroup, Container } from "react-bootstrap";
 const Product = () => {
   let url = useParams();
   url = url.id;
-  // let item = products.find((p) => p._id === url.id);
-  // console.log(item);
   const dispatch = useDispatch();
 
   const productDetail = useSelector((state) => state.productDetail);
   const { Loading, error, product } = productDetail;
-  console.log(product);
-
-  // const item = item;
   const item = product;
 
   useEffect(() => {
