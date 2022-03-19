@@ -1,16 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Rating from "../Components/Rating";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SpinnerCom from "../Components/SpinnerCom";
 import Message from "../Components/Message";
 import { productDetails } from "../Actions/ProductDetailsActions.js";
-import { Image, Row, Col, Button, ListGroup, Container } from "react-bootstrap";
+import {
+  Image,
+  Row,
+  Col,
+  Button,
+  ListGroup,
+  Container,
+  Form,
+} from "react-bootstrap";
 
 const Product = () => {
   let url = useParams();
   url = url.id;
   const dispatch = useDispatch();
+  const navigator = useNavigate();
 
   const productDetail = useSelector((state) => state.productDetail);
   const { Loading, error, product } = productDetail;
@@ -19,6 +28,12 @@ const Product = () => {
   useEffect(() => {
     dispatch(productDetails(url));
   }, [dispatch, url]);
+
+  const [qty, setQty] = useState(0);
+
+  const addToCart = () => {
+    navigator(`/cart/${url}?qty=${qty}`);
+  };
 
   return (
     <React.Fragment>
@@ -78,18 +93,49 @@ const Product = () => {
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <h5>Price :</h5>
+                      <h6>Quantity :</h6>
                     </Col>
                     <Col>
-                      <h5 className="text-center">
-                        {item.countInStock > 0 ? "InStock" : "OutOfStock"}
-                      </h5>
+                      <h6>{item.countInStock}</h6>
                     </Col>
                   </Row>
                 </ListGroup.Item>
+
+                {item.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>qty</Col>
+                      <Col>
+                        <Form.Control
+                          as="select"
+                          value={qty}
+                          onChange={(e) => {
+                            setQty(e.target.value);
+                          }}
+                        >
+                          {[...Array(item.countInStock).keys()].map((x) => {
+                            return (
+                              <option key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </option>
+                            );
+                          })}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+
                 <ListGroup.Item>
                   <div className="d-grid gap-2">
-                    <Button className="btn-lg">Add to Cart</Button>
+                    <Button
+                      className="btn-lg"
+                      onClick={() => {
+                        addToCart();
+                      }}
+                    >
+                      Add to Cart
+                    </Button>
                   </div>
                 </ListGroup.Item>
               </ListGroup>

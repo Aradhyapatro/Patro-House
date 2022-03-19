@@ -12,6 +12,31 @@ code {
     monospace;
 }
 
-/* body {
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+
+h3 {
+  padding: 1rem 0;
+}
+
+h3 {
+}
+
+.listGroup {
+  margin: 0.5rem 1rem;
+}
+
+.margin {
+  margin: 1rem;
+}
+
+body {
   overflow: hidden;
-} */
+}

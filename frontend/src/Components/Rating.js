@@ -71,7 +71,7 @@ const Rating = ({ rating, review, color }) => {
 
 Rating.propTypes = {
   rating: PropTypes.number.isRequired,
-  review: PropTypes.number.isRequired,
+  review: PropTypes.number,
   color: PropTypes.string,
 };
 
