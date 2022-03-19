@@ -1,7 +1,8 @@
 import {
   getProducts,
   getProductsById,
-} from "../Controllers/ProductControllers";
+} from "../Controllers/ProductControllers.js";
+import express from "express";
 const router = express.Router();
 
 // @desc   gets all the products data

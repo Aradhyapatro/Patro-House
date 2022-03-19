@@ -1,4 +1,3 @@
-import express from "express";
 import products from "../models/ProductModel.js";
 import asyncHandler from "express-async-handler";
 
