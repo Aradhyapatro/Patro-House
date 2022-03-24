@@ -5,6 +5,7 @@ import cors from "cors";
 import db from "./config/db.js";
 import colors from "colors";
 import productRoutes from "./routes/ProductRoutes.js";
+import userRoute from "./routes/UserRoute.js";
 import { notFound, errorhandler } from "./middleware/ErrorHandlerMiddleware.js";
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(cors());
 db();
 
 app.use("/api/products", productRoutes);
+app.use("/api/users/", userRoute);
+
 app.use(notFound);
 app.use(errorhandler);
 
