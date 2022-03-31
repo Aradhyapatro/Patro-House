@@ -12,7 +12,7 @@ const router = express.Router();
 // @route  POST /api/users
 router.post("/", registerUser);
 
-// @desc   Auth user & token
+// @desc   Login User by sAuth user & token
 // @access public
 // @route  POST /api/users/login
 router.post("/login", getUser);

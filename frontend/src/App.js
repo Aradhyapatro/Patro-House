@@ -1,8 +1,9 @@
-import Main from "./Screens/Main";
+import Main from "./Screens/MainScreen";
 import CartScreen from "./Screens/CartScreen";
-import Product from "./Screens/Product";
+import Product from "./Screens/ProductScreen";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import LoginScreen from "./Screens/LoginScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />}></Route>
+          <Route path="/login" element={<LoginScreen />}></Route>
           <Route path="/products/:id" element={<Product />}></Route>
           <Route path="/cart/:id" element={<CartScreen />}></Route>
           <Route path="/cart/" element={<CartScreen />}></Route>
