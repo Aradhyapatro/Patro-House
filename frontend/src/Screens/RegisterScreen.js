@@ -1,35 +1,42 @@
 import React, { useEffect, useState } from "react";
-import Message from "../Components/Message.js";
-import Spinner from "../Components/SpinnerCom";
-import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { userloginAction } from "../Actions/UserLoginActions.js";
-import FormContainer from "../Components/FormContainer.js";
+import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import FormContainer from "../Components/FormContainer";
+import Message from "../Components/Message";
+import { userRegisterAction } from "../Actions/UserLoginActions";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [searchParam, setSearchParam] = useSearchParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { Loading, error, userInfo } = userLogin;
 
   const redirect = searchParam.get("redirect")
     ? searchParam.get("redirect").split("=")[1]
     : "/";
 
+  const userLogin = useSelector((state) => state.userLogin);
+  let { error, Loading, userInfo } = userLogin;
+
   useEffect(() => {
     if (userInfo) {
-      navigate(`${redirect}`);
+      navigate(redirect);
     }
-  }, [navigate, userInfo, redirect]);
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(userloginAction(email, password));
+    if (password !== confirmPassword) {
+      error = "The Password and ConfirmPassword don't match";
+      return;
+    }
+
+    dispatch(userRegisterAction(name, email, password));
   };
 
   return (
@@ -38,6 +45,18 @@ const LoginScreen = () => {
       {Loading && <Spinner />}
       <h1>Sign in</h1>
       <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>name</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            value={name}
+          ></Form.Control>
+        </Form.Group>
+
         <Form.Group>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -62,6 +81,18 @@ const LoginScreen = () => {
           ></Form.Control>
         </Form.Group>
 
+        <Form.Group>
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="confirm password"
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
+            value={confirmPassword}
+          ></Form.Control>
+        </Form.Group>
+
         <Button type="submit" variant="primary">
           Submit
         </Button>
@@ -69,13 +100,9 @@ const LoginScreen = () => {
 
       <Row className="py-3">
         <Col>
-          New Customer :
-          <Link
-            to={
-              redirect !== "/" ? `register?redirect=${redirect}` : "/register"
-            }
-          >
-            Register
+          Already Have a Account :
+          <Link to={redirect !== "/" ? `login?redirect=${redirect}` : "/login"}>
+            Login
           </Link>
         </Col>
       </Row>
@@ -83,4 +110,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

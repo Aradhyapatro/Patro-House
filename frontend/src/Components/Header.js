@@ -1,13 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogoutAction } from "../Actions/UserLoginActions.js";
-import {
-  Nav,
-  Navbar,
-  Container,
-  NavDropdown,
-  LinkContainer,
-} from "react-bootstrap";
+import { Nav, Navbar, Container, NavDropdown } from "react-bootstrap";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -34,7 +28,8 @@ const Header = () => {
               <Nav.Link href="/cart/">
                 <i className="fa-solid fa-cart-shopping p-2"></i>Cart
               </Nav.Link>
-              {userInfo !== [] ? (
+
+              {userInfo ? (
                 <NavDropdown id="username" title={userInfo.name}>
                   <NavDropdown.Item onClick={profileView}>
                     Profile
