@@ -3,7 +3,6 @@ import express from "express";
 import products from "./data/products.js";
 import cors from "cors";
 import db from "./config/db.js";
-import colors from "colors";
 import productRoutes from "./routes/ProductRoutes.js";
 import userRoute from "./routes/UserRoute.js";
 import { notFound, errorhandler } from "./middleware/ErrorHandlerMiddleware.js";
@@ -15,16 +14,20 @@ app.use(express.json());
 app.use(cors());
 db();
 
+// Routes or api-end-points
 app.use("/api/products", productRoutes);
 app.use("/api/users/", userRoute);
 
+// Error Handler middlewares
 app.use(notFound);
 app.use(errorhandler);
 
+// base api end-point
 app.get("/", (req, res) => {
   res.send("API End Point Working");
 });
 
+// listening to port
 app.listen(process.env.PORT || 5000, () => {
   console.log(
     `  API SERVER running ${process.env.NODE_ENVIRONMENT} environment at port = ${process.env.PORT}  `
