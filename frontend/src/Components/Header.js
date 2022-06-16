@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { userLogoutAction } from "../Actions/UserLoginActions.js";
+import { userLogoutAction } from "../Actions/UserActions.js";
 import { Nav, Navbar, Container, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,6 @@ const Header = () => {
 
   const logoutHander = () => {
     dispatch(userLogoutAction());
-    console.log("Logout");
   };
 
   const profileView = () => {
@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar bg="primary" variant="dark" expand="lg">
+      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <Navbar.Brand href="/">Patro-House</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -31,7 +31,7 @@ const Header = () => {
 
               {userInfo ? (
                 <NavDropdown id="username" title={userInfo.name}>
-                  <NavDropdown.Item onClick={profileView}>
+                  <NavDropdown.Item href="/profile" onClick={profileView}>
                     Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={logoutHander}>

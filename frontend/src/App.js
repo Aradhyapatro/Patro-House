@@ -6,6 +6,7 @@ import Footer from "./Components/Footer";
 import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProfileScreen from "./Screens/ProfileScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/products/:id" element={<Product />}></Route>
           <Route path="/cart/:id" element={<CartScreen />}></Route>
           <Route path="/cart/" element={<CartScreen />}></Route>
+          <Route path="/profile" element={<ProfileScreen />}></Route>
         </Routes>
       </BrowserRouter>
 

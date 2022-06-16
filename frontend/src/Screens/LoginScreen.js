@@ -4,7 +4,7 @@ import Spinner from "../Components/SpinnerCom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { userloginAction } from "../Actions/UserLoginActions.js";
+import { userloginAction } from "../Actions/UserActions.js";
 import FormContainer from "../Components/FormContainer.js";
 
 const LoginScreen = () => {
@@ -33,53 +33,55 @@ const LoginScreen = () => {
   };
 
   return (
-    <FormContainer>
+    <>
       {error && <Message variant="danger" message={error}></Message>}
       {Loading && <Spinner />}
-      <h1>Sign in</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            value={email}
-          ></Form.Control>
-        </Form.Group>
+      <FormContainer>
+        <h1>Sign in</h1>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              value={email}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            value={password}
-          ></Form.Control>
-        </Form.Group>
+          <Form.Group>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              value={password}
+            ></Form.Control>
+          </Form.Group>
 
-        <Button type="submit" variant="primary">
-          Submit
-        </Button>
-      </Form>
+          <Button type="submit" variant="primary">
+            Submit
+          </Button>
+        </Form>
 
-      <Row className="py-3">
-        <Col>
-          New Customer :
-          <Link
-            to={
-              redirect !== "/" ? `register?redirect=${redirect}` : "/register"
-            }
-          >
-            Register
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+        <Row className="py-3">
+          <Col>
+            New Customer :
+            <Link
+              to={
+                redirect !== "/" ? `register?redirect=${redirect}` : "/register"
+              }
+            >
+              Register
+            </Link>
+          </Col>
+        </Row>
+      </FormContainer>
+    </>
   );
 };
 

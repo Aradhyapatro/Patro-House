@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import products from "./data/products.js";
+import colors from "colors";
 import cors from "cors";
 import db from "./config/db.js";
 import productRoutes from "./routes/ProductRoutes.js";

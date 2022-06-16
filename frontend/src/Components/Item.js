@@ -6,7 +6,7 @@ import { Card } from "react-bootstrap";
 const Item = ({ product }) => {
   return (
     <>
-      <Card key={product._id} className="m-3 card">
+      <Card key={product._id} className="m-3 card rounded">
         <Link to={`products/${product._id}`}>
           <Card.Img
             src={product.image}
@@ -25,9 +25,7 @@ const Item = ({ product }) => {
             review={product.numReviews}
             color="red"
           />
-          <Card.Text>
-            <h4> ₹{product.price}</h4>
-          </Card.Text>
+          <Card.Text>₹{product.price}</Card.Text>
         </Card.Body>
       </Card>
     </>

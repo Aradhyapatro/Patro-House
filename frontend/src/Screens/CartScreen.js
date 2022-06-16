@@ -30,7 +30,6 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  console.log(cartItems);
 
   useEffect(() => {
     dispatch(addToCart(productId, quantity));
@@ -107,7 +106,7 @@ const CartScreen = () => {
       <Col md={3}>
         <h1 className="text-center"> details</h1>
         <Card>
-          <ListGroup classname="margin" variant="flush">
+          <ListGroup className="margin" variant="flush">
             <ListGroup.Item>
               <h2>
                 Sub-Total is (

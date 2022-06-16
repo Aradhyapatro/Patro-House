@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import FormContainer from "../Components/FormContainer";
 import Message from "../Components/Message";
-import { userRegisterAction } from "../Actions/UserLoginActions";
+import { userRegisterAction } from "../Actions/UserActions";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const RegisterScreen = () => {
@@ -12,6 +12,7 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [searchParam, setSearchParam] = useSearchParams();
+  const [message1, setMessage] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const RegisterScreen = () => {
     : "/";
 
   const userLogin = useSelector((state) => state.userLogin);
-  let { error, Loading, userInfo } = userLogin;
+  const { error, Loading, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
@@ -32,15 +33,15 @@ const RegisterScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      error = "The Password and ConfirmPassword don't match";
-      return;
+      setMessage("passwords don't match");
+    } else {
+      dispatch(userRegisterAction(name, email, password));
     }
-
-    dispatch(userRegisterAction(name, email, password));
   };
 
   return (
     <FormContainer>
+      {message1 && <Message variant="danger" message={message1}></Message>}
       {error && <Message variant="danger" message={error}></Message>}
       {Loading && <Spinner />}
       <h1>Sign in</h1>

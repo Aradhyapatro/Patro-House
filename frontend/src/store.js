@@ -7,7 +7,9 @@ import { CartReducer } from "./Reducers/CartReducer.js";
 import {
   userloginReducer,
   userRegistionReducer,
-} from "./Reducers/UserLoginReducer.js";
+  userDetailsReducer,
+  userUpdateProfileReducer,
+} from "./Reducers/UserReducer.js";
 
 const middleWare = [thunk];
 const reducers = combineReducers({
@@ -16,6 +18,8 @@ const reducers = combineReducers({
   cart: CartReducer,
   userLogin: userloginReducer,
   userRegister: userRegistionReducer,
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

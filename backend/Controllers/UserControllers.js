@@ -52,8 +52,34 @@ const getUser = asycHandler(async (req, res) => {
   }
 });
 
+const updateUser = asycHandler(async (req, res) => {
+  const user = await Users.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    if (req.body.password && req.body.password !== "") {
+      user.password = req.body.password;
+    }
+    const new_user = await user.save();
+
+    res.json({
+      id: new_user._id,
+      name: new_user.name,
+      email: new_user.email,
+      isAdmin: new_user.isAdmin,
+      Token: Genarate(new_user._id),
+    });
+  } else {
+    console.log("USer error");
+    res.status(400);
+    throw new Error("No such user");
+  }
+});
+
 const userProfile = (req, res) => {
-  res.send("Hello Profile");
+  res.json(req.user);
 };
 
-export { getUser, userProfile, registerUser };
+export { getUser, userProfile, registerUser, updateUser };
