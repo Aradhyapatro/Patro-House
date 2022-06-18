@@ -18,15 +18,15 @@ const RegisterScreen = () => {
   const navigate = useNavigate();
 
   const redirect = searchParam.get("redirect")
-    ? searchParam.get("redirect").split("=")[1]
-    : "/";
+    ? searchParam.get("redirect")
+    : "";
 
   const userLogin = useSelector((state) => state.userLogin);
   const { error, Loading, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect);
+      navigate(`/${redirect}`);
     }
   });
 

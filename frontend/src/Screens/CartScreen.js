@@ -26,7 +26,7 @@ const CartScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const quantity = searchParams.get("qty")
     ? Number(searchParams.get("qty"))
-    : 1;
+    : Number(1);
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;

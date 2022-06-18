@@ -44,6 +44,7 @@ const ProfileScreen = () => {
     } else {
       // update the profile
       dispatch(userUpdateAction({ id: user._id, name, email, password }));
+      dispatch(userDetailsAction("profile"));
     }
   };
 

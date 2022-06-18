@@ -6,6 +6,7 @@ import cors from "cors";
 import db from "./config/db.js";
 import productRoutes from "./routes/ProductRoutes.js";
 import userRoute from "./routes/UserRoute.js";
+import orderRoute from "./routes/OrderRoutes.js";
 import { notFound, errorhandler } from "./middleware/ErrorHandlerMiddleware.js";
 const app = express();
 
@@ -18,6 +19,7 @@ db();
 // Routes or api-end-points
 app.use("/api/products", productRoutes);
 app.use("/api/users/", userRoute);
+app.use("/api/orders", orderRoute);
 
 // Error Handler middlewares
 app.use(notFound);

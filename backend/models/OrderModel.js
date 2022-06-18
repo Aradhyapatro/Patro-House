@@ -23,18 +23,22 @@ const orderSchema = new mongoose.Schema(
     shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
-      postalcode: { type: String, required: true },
+      postalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
-    PaymentMethod: {
+    paymentMethod: {
       type: String,
       required: true,
     },
-    PaymentResult: {
+    paymentResult: {
       id: { type: String },
       status: { type: String },
       update_time: { type: String },
       email_address: { type: String },
+    },
+    itemsPrice: {
+      type: Number,
+      required: true,
     },
     taxPrice: {
       type: Number,

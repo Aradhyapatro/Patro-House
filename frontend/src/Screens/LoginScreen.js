@@ -18,12 +18,12 @@ const LoginScreen = () => {
   const { Loading, error, userInfo } = userLogin;
 
   const redirect = searchParam.get("redirect")
-    ? searchParam.get("redirect").split("=")[1]
-    : "/";
+    ? searchParam.get("redirect")
+    : "";
 
   useEffect(() => {
     if (userInfo) {
-      navigate(`${redirect}`);
+      navigate(`/${redirect}`);
     }
   }, [navigate, userInfo, redirect]);
 
