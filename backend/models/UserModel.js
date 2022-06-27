@@ -40,6 +40,6 @@ userSchema.pre("save", async function (next) {
   this.password = await bcryptjs.hash(this.password, salt);
 });
 
-const user = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-export default user;
+export default User;

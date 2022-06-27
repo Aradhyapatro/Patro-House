@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Order from "../models/OrderModel.js";
+import mongoose from "mongoose";
+import order from "../models/OrderModel.js";
 
 export const createOrder = asyncHandler(async (req, res) => {
   const {
@@ -35,10 +37,36 @@ export const createOrder = asyncHandler(async (req, res) => {
 });
 
 export const getOrderByID = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id).populate(
-    "user",
-    "name email"
-  );
+  const id = req.params.id;
+  const myOrder = await Order.findById(id).populate("user", "name email");
 
-  res.status(200).json(order);
+  if (myOrder) {
+    res.json(myOrder);
+  } else {
+    console.log("Error in getting data");
+  }
+});
+
+export const payForOrderById = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const myOrder = await Order.findById(id);
+
+  if (myOrder) {
+    myOrder.ispaid = true;
+    myOrder.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.email_address,
+    };
+  }
+
+  const updateOrder = myOrder.save();
+
+  if (updateOrder) {
+    res.status(200).json(updateOrder);
+  } else {
+    throw new Error("Could not pay");
+  }
 });
