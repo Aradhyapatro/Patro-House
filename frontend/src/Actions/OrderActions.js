@@ -94,17 +94,16 @@ export const orderPayAction =
       const config = {
         headers: {
           "Content-Type": "application/json",
-
           Authorization: `Bearer ${userInfo.Token}`,
         },
       };
-
+      console.log("Paying to backend", config);
       const { data } = await axios.get(
         `http://localhost:5000/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );
-
+      console.log("Paying done");
       dispatch({
         type: ORDER_PAY_SUCCESS,
         payload: { ...data },

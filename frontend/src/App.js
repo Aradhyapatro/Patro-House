@@ -11,35 +11,38 @@ import ShippingScreen from "./Screens/ShippingScreen";
 import PaymentScreen from "./Screens/PaymentScareen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
 import OrderScreen from "./Screens/OrderScreen";
-import { useEffect } from "react";
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+
 
 function App() {
 
   return (
     <>
-      {/* Header */}
-      <Header />
+      <PayPalScriptProvider options={{ "client-id": process.env.clientID }}>
+        {/* Header */}
+        <Header />
 
-      {/* Main */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/payment" element={<PaymentScreen />}></Route>
-          <Route path="/Shipping" element={<ShippingScreen />}></Route>
-          <Route path="/order/:id" element={<OrderScreen />}></Route>
-          <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
-          <Route path="/Register" element={<RegisterScreen />}></Route>
-          <Route path="/login" element={<LoginScreen />}></Route>
-          <Route path="/login?" element={<LoginScreen />}></Route>
-          <Route path="/products/:id" element={<Product />}></Route>
-          <Route path="/cart/:id" element={<CartScreen />}></Route>
-          <Route path="/cart/" element={<CartScreen />}></Route>
-          <Route path="/profile" element={<ProfileScreen />}></Route>
-        </Routes>
-      </BrowserRouter>
+        {/* Main */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/payment" element={<PaymentScreen />}></Route>
+            <Route path="/Shipping" element={<ShippingScreen />}></Route>
+            <Route path="/order/:id" element={<OrderScreen />}></Route>
+            <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
+            <Route path="/Register" element={<RegisterScreen />}></Route>
+            <Route path="/login" element={<LoginScreen />}></Route>
+            <Route path="/login?" element={<LoginScreen />}></Route>
+            <Route path="/products/:id" element={<Product />}></Route>
+            <Route path="/cart/:id" element={<CartScreen />}></Route>
+            <Route path="/cart/" element={<CartScreen />}></Route>
+            <Route path="/profile" element={<ProfileScreen />}></Route>
+          </Routes>
+        </BrowserRouter>
 
-      {/* Footer */}
-      <Footer />
+        {/* Footer */}
+        <Footer />
+      </PayPalScriptProvider>
     </>
   );
 }

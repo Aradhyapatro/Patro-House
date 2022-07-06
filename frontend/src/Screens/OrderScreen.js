@@ -73,10 +73,7 @@ const OrderScreen = () => {
       script.type = "text/javascript";
       script.async = true;
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
+      setSdkReady(true);
     };
     addScript();
 
@@ -84,19 +81,21 @@ const OrderScreen = () => {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(orderDetailsAction(orderId));
     } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addScript();
-      } else {
-        setSdkReady(true);
-      }
+      setSdkReady(true);
     }
+
   }, [order, orderId, successPay]);
 
-  const onSuccessPayment = (paymentResult) => {
-    console.log("payment = ", paymentResult);
+  const handleApprove = (order) => {
+    const paymentResult = {
+      id: order.id,
+      status: order.status,
+      email_address: order.payer.email_address,
+      update_time: order.update_time
+    }
+    console.log("order", paymentResult);
     dispatch(orderPayAction(orderId, paymentResult));
-    console.log("Done");
-  };
+  }
 
   return loading ? (
     <SpinnerCom />
@@ -212,18 +211,6 @@ const OrderScreen = () => {
                 <Row>
                   <Col>Total</Col>
                   <Col>₹{order.totalPrice}</Col>
-                  <PayPalButton
-                    options={{
-                      clientId: clientId,
-                      currency: "USD",
-                    }}
-                    amount={order.totalPrice}
-                    onSuccess={(details, data) => {
-                      alert("Transaction completed by " + details.payer.name.given_name);
-
-                      console.log({ details, data });
-                    }}
-                  />
                 </Row>
               </ListGroup.Item>
 
@@ -233,18 +220,39 @@ const OrderScreen = () => {
                   {!sdkReady ? (
                     <SpinnerCom></SpinnerCom>
                   ) : (
-                    <PayPalButton
-                      options={{
-                        clientId: clientId,
-                        currency: "USD",
-                      }}
-                      amount={order.totalPrice}
-                      onSuccess={(details, data) => {
-                        alert("Transaction completed by " + details.payer.name.given_name);
-
-                        console.log({ details, data });
-                      }}
-                    />
+                    <PayPalScriptProvider>
+                      <PayPalButtons
+                        onClick={(data, actions) => {
+                          const hasAlreadyBoughtCourse = false;
+                          if (hasAlreadyBoughtCourse) {
+                            return actions.reject();
+                          } else {
+                            return actions.resolve();
+                          }
+                        }}
+                        createOrder={(data, actions) => {
+                          return actions.order.create({
+                            purchase_units: [
+                              {
+                                description: order.items,
+                                amount: {
+                                  value: order.totalPrice,
+                                },
+                              },
+                            ],
+                          });
+                        }}
+                        onApprove={async (data, action) => {
+                          const order = await action.order.capture();
+                          handleApprove(order);
+                          console.log("YEs");
+                        }}
+                        onCancel={() => { }}
+                        onError={(err) => {
+                          console.log("PayPal Checkout onError", err);
+                        }}
+                      />
+                    </PayPalScriptProvider>
                   )}
                 </ListGroup.Item>
               )}
