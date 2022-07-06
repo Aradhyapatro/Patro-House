@@ -15,6 +15,7 @@ import {
   orderDetailsReducer,
   orderPayReducer,
 } from "./Reducers/orderReducers";
+import { getPaypalClientId } from './Reducers/Paypal'
 
 const middleWare = [thunk];
 const reducers = combineReducers({
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   orderCreated: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
+  paypal: getPaypalClientId
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

@@ -100,7 +100,7 @@ export const orderPayAction =
       };
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/${id}/pay`,
+        `http://localhost:5000/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );

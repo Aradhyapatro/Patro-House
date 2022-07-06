@@ -22,7 +22,7 @@ app.use("/api/users/", userRoute);
 app.use("/api/orders", orderRoute);
 
 app.get("/api/config/paypal", (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID);
+  res.json({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
 
 // Error Handler middlewares

@@ -11,8 +11,10 @@ import ShippingScreen from "./Screens/ShippingScreen";
 import PaymentScreen from "./Screens/PaymentScareen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
 import OrderScreen from "./Screens/OrderScreen";
+import { useEffect } from "react";
 
 function App() {
+
   return (
     <>
       {/* Header */}
