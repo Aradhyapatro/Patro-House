@@ -90,11 +90,12 @@ export const orderPayAction =
       const {
         userLogin: { userInfo },
       } = getState();
+      console.log("token=", userInfo.Token);
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.Token}`,
+          "Authorization": `Bearer ${userInfo.Token}`,
         },
       };
       console.log("Paying to backend", config);
@@ -103,7 +104,7 @@ export const orderPayAction =
         paymentResult,
         config
       );
-      console.log("Paying done");
+
       dispatch({
         type: ORDER_PAY_SUCCESS,
         payload: { ...data },

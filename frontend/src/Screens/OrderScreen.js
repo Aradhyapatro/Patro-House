@@ -38,6 +38,7 @@ const OrderScreen = () => {
   const { order, loading, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
+
   const {
     success: successPay,
     loading: loadingPay,
@@ -84,7 +85,7 @@ const OrderScreen = () => {
       setSdkReady(true);
     }
 
-  }, [order, orderId, successPay]);
+  }, [order, orderId, successPay, orderPay]);
 
   const handleApprove = (order) => {
     const paymentResult = {
@@ -93,7 +94,6 @@ const OrderScreen = () => {
       email_address: order.payer.email_address,
       update_time: order.update_time
     }
-    console.log("order", paymentResult);
     dispatch(orderPayAction(orderId, paymentResult));
   }
 
@@ -245,7 +245,6 @@ const OrderScreen = () => {
                         onApprove={async (data, action) => {
                           const order = await action.order.capture();
                           handleApprove(order);
-                          console.log("YEs");
                         }}
                         onCancel={() => { }}
                         onError={(err) => {

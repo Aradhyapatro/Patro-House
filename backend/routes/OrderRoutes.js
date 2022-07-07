@@ -20,6 +20,6 @@ router.route("/:id").get(protect, getOrderByID);
 // @desc   Get the order to pay
 // @access private
 // @route  GET /api/orders/:id/pay
-router.route("/:id/pay").get(protect, payForOrderById);
+router.route("/:id/pay").get(payForOrderById);
 
 export default router;
