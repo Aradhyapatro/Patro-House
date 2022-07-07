@@ -87,15 +87,9 @@ export const orderPayAction =
     try {
       dispatch({ type: ORDER_PAY_REQUEST });
 
-      const {
-        userLogin: { userInfo },
-      } = getState();
-      console.log("token=", userInfo.Token);
-
       const config = {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${userInfo.Token}`,
         },
       };
       console.log("Paying to backend", config);
