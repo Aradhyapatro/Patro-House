@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Form, Row, Spinner, Table } from "react-bootstrap";
 import Message from "../Components/Message";
 import { userDetailsAction, userUpdateAction } from "../Actions/UserActions";
 import { useNavigate } from "react-router-dom";
+import { orderListMyAction } from '../Actions/OrderActions';
+import SpinnerCom from "../Components/SpinnerCom";
+import { LinkContainer } from 'react-router-bootstrap';
 
 const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -24,12 +27,18 @@ const ProfileScreen = () => {
   const userUpdate = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdate;
 
+  const myOrders = useSelector((state) => state.myOrderList);
+  const { Loading: LoadingOrders, error: errorOrders, orders: ordersMy } = myOrders
+
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
       if (!user || !user.name) {
         dispatch(userDetailsAction("profile"));
+        dispatch(orderListMyAction());
+        console.log("Done");
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -49,7 +58,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <Row>
+    <Row >
       <Col md={3}>
         {success && (
           <Message
@@ -59,7 +68,7 @@ const ProfileScreen = () => {
         )}
         {error && <Message variant="danger" message={error}></Message>}
         {Loading && <Spinner />}
-        <h1>User Profile</h1>
+        <h1 className="Text-Center">User Profile</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>name</Form.Label>
@@ -114,10 +123,42 @@ const ProfileScreen = () => {
           </Button>
         </Form>
       </Col>
-      <Col md={9}>
-        <h2>My orders</h2>
-      </Col>
-    </Row>
+      <Col md={8}>
+        <h2 className="Text-Center">My orders </h2>
+        {
+          LoadingOrders ?
+            <SpinnerCom></SpinnerCom> : errorOrders ? <Message message={errorOrders}></Message> : (
+              <Table>
+                <thead>
+                  <tr>
+                    <td>ID</td>
+                    <td>DATE</td>
+                    <td>TOTAL</td>
+                    <td>PAID</td>
+                    <td>DELIVERED</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* {ordersMy.map((order) => (
+                    <tr key={order._id}>
+                      <td>{order._id}</td>
+                      <td>{order.createdAt.substring(0, 10)}</td>
+                      <td>{order.totalPrice}</td>
+                      <td>{order.isPaid ? order.paidAt.substring(0, 10) : <i className="fas fa-times" style={{ color: "red" }}></i>}</td>
+                      <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : <i className="fas fa-times" style={{ color: "red" }}></i>}</td>
+                      <td>
+                        <LinkContainer to={`/order/${order._id}`}>
+                          <Button className="btn-sm" varient='light'>Details</Button>
+                        </LinkContainer>
+                      </td>
+                    </tr>
+                  ))
+                  } */}
+                </tbody >
+              </Table >
+            )}
+      </Col >
+    </Row >
   );
 };
 
