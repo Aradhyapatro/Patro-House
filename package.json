@@ -14,6 +14,7 @@
   "author": "Aradhya Patro a.k.a Arya",
   "license": "ISC",
   "dependencies": {
+    "@paypal/react-paypal-js": "github:paypal/react-paypal-js",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "concurrently": "^7.0.0",
