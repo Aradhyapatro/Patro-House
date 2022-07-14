@@ -115,7 +115,7 @@ const ProfileScreen = () => {
         </Form>
       </Col>
       <Col md={9}>
-        <h2>My orders</h2>
+        <h2 className="Text-Center">My orders</h2>
       </Col>
     </Row>
   );

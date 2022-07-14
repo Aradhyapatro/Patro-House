@@ -32,7 +32,7 @@ const OrderScreen = () => {
   const orderId = useParams().id;
   const dispatch = useDispatch();
 
-  const [sdkReady, setSdkReady] = useState(false);
+  // const [sdkReady, setSdkReady] = useState(false);
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -62,30 +62,32 @@ const OrderScreen = () => {
     console.log(paymentResult);
     dispatch(orderPayAction(orderId, paymentResult));
   };
-  let clientId;
+  // let clientId;
 
   useEffect(() => {
-    const addScript = async () => {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/config/paypal"
-      );
-      clientId = data.clientId;
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.async = true;
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      setSdkReady(true);
-    };
-    addScript();
+    // const addScript = async () => {
+    //   const { data } = await axios.get(
+    //     "http://localhost:5000/api/config/paypal"
+    //   );
+    //   clientId = data.clientId;
+    //   const script = document.createElement("script");
+    //   script.type = "text/javascript";
+    //   script.async = true;
+    //   script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+    //   setSdkReady(true);
+    //   // document.appendChild(script)
+    // };
+    // addScript();
 
     if (!order || successPay || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(orderDetailsAction(orderId));
-    } else if (!order.isPaid) {
-      setSdkReady(true);
     }
+    // else if (!order.isPaid) {
+    //   setSdkReady(true);
+    // }
 
-  }, [order, orderId, successPay, orderPay]);
+  }, [order, orderId, orderPay, successPay]);
 
   const handleApprove = (order) => {
     const paymentResult = {
@@ -94,6 +96,7 @@ const OrderScreen = () => {
       email_address: order.payer.email_address,
       update_time: order.update_time
     }
+    console.log(paymentResult);
     dispatch(orderPayAction(orderId, paymentResult));
   }
 
@@ -103,7 +106,7 @@ const OrderScreen = () => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <h1>Order {order._id}</h1>
+      <h1 className="Text-Center">Order {order._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
@@ -217,41 +220,43 @@ const OrderScreen = () => {
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <SpinnerCom></SpinnerCom>}
-                  {!sdkReady ? (
+                  {/* {!sdkReady ? (
                     <SpinnerCom></SpinnerCom>
-                  ) : (
-                    <PayPalScriptProvider>
-                      <PayPalButtons
-                        onClick={(data, actions) => {
-                          const hasAlreadyBoughtCourse = false;
-                          if (hasAlreadyBoughtCourse) {
-                            return actions.reject();
-                          } else {
-                            return actions.resolve();
-                          }
-                        }}
-                        createOrder={(data, actions) => {
-                          return actions.order.create({
-                            purchase_units: [
-                              {
-                                description: order.items,
-                                amount: {
-                                  value: order.totalPrice,
-                                },
+                  ) :  */}
+                  (
+                  <PayPalScriptProvider>
+                    <PayPalButtons
+                      onClick={(data, actions) => {
+                        const hasAlreadyBoughtCourse = false;
+                        if (hasAlreadyBoughtCourse) {
+                          return actions.reject();
+                        } else {
+                          return actions.resolve();
+                        }
+                      }}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              description: order.items,
+                              amount: {
+                                value: order.totalPrice,
                               },
-                            ],
-                          });
-                        }}
-                        onApprove={async (data, action) => {
-                          const order = await action.order.capture();
-                          handleApprove(order);
-                        }}
-                        onCancel={() => { }}
-                        onError={(err) => {
-                          console.log("PayPal Checkout onError", err);
-                        }}
-                      />
-                    </PayPalScriptProvider>
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={async (data, action) => {
+                        const order = await action.order.capture();
+                        handleApprove(order);
+                        console.log("Payment Done");
+                      }}
+                      onCancel={() => { }}
+                      onError={(err) => {
+                        console.log("PayPal Checkout onError", err);
+                      }}
+                    />
+                  </PayPalScriptProvider>
                   )}
                 </ListGroup.Item>
               )}

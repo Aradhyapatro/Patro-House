@@ -1,7 +1,5 @@
 import asyncHandler from "express-async-handler";
 import Order from "../models/OrderModel.js";
-import mongoose from "mongoose";
-import order from "../models/OrderModel.js";
 
 export const createOrder = asyncHandler(async (req, res) => {
   const {
@@ -60,11 +58,22 @@ export const payForOrderById = asyncHandler(async (req, res) => {
       email_address: req.body.email_address,
     };
   }
+  console.table(myOrder)
   const updateOrder = await myOrder.save();
 
   if (updateOrder) {
     res.status(200).json(updateOrder);
   } else {
     throw new Error("Could not pay");
+  }
+});
+
+export const getMyOrders = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
+  try {
+    const orders = await Order.find({ user: req.user._id });
+    res.json(orders);
+  } catch (error) {
+    throw new Error("Retrival issue")
   }
 });

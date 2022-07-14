@@ -98,7 +98,7 @@ export const orderPayAction =
         paymentResult,
         config
       );
-
+      console.log("Payment Action done");
       dispatch({
         type: ORDER_PAY_SUCCESS,
         payload: { ...data },

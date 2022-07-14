@@ -15,3 +15,7 @@
   -webkit-box-shadow: 24px 18px 17px -10px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 24px 18px 17px -10px rgba(0, 0, 0, 0.75);
 }
+
+.Text-Center {
+  text-align: center;
+}
