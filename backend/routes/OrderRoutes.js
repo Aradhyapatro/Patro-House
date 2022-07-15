@@ -1,7 +1,7 @@
 import {
   createOrder,
   getOrderByID,
-  payForOrderById,
+  payForOrderById, getMyOrders
 } from "../Controllers/OrderController.js";
 import { protect } from "../middleware/AuthMiddleware.js";
 import express from "express";
@@ -11,6 +11,11 @@ const router = express.Router();
 // @access private
 // @route  POST /api/orders
 router.route("/").post(protect, createOrder);
+
+// @desc   Get my Orders List
+// @access private
+// @route  POST /api/orders/getmyOrders
+router.route("/getMyOrders").get(protect, getMyOrders);
 
 // @desc   Get the order Details by id
 // @access private

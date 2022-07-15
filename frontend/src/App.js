@@ -12,7 +12,7 @@ import PaymentScreen from "./Screens/PaymentScareen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
 import OrderScreen from "./Screens/OrderScreen";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-
+import UserListScreen from './Screens/UserListScreen'
 
 function App() {
 
@@ -28,6 +28,7 @@ function App() {
             <Route path="/" element={<Main />}></Route>
             <Route path="/payment" element={<PaymentScreen />}></Route>
             <Route path="/Shipping" element={<ShippingScreen />}></Route>
+            <Route path="/admin/usersList" element={<UserListScreen />}></Route>
             <Route path="/order/:id" element={<OrderScreen />}></Route>
             <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
             <Route path="/Register" element={<RegisterScreen />}></Route>

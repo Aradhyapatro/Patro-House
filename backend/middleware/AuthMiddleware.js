@@ -23,4 +23,12 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect };
+const isAdmin = asyncHandler((req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    throw new Error('Only Admin has Access to this page');
+  }
+})
+
+export { protect, isAdmin };

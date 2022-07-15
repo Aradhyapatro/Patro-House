@@ -3,8 +3,9 @@ import {
   userProfile,
   registerUser,
   updateUser,
+  getUsers, deleteUser, getUserById
 } from "../Controllers/UserControllers.js";
-import { protect } from "../middleware/AuthMiddleware.js";
+import { protect, isAdmin } from "../middleware/AuthMiddleware.js";
 import express from "express";
 const router = express.Router();
 
@@ -27,5 +28,20 @@ router.route("/profile").get(protect, userProfile);
 // @access private
 // @route  PUT /api/users/profile
 router.route("/profile").put(protect, updateUser);
+
+// @desc   Get all Users
+// @access private
+// @route  GET /api/users/getUsers
+router.route("/getUsers").get(protect, isAdmin, getUsers);
+
+// @desc   Delete User by id
+// @access private
+// @route  GET /api/users/:id
+router.route("/:id").get(protect, isAdmin, deleteUser);
+
+// @desc   Get User by id
+// @access private
+// @route  GET /api/users/getUsers/:id
+router.route("/getUsers/:id").get(protect, isAdmin, getUserById);
 
 export default router;
