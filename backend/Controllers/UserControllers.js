@@ -78,8 +78,63 @@ const updateUser = asycHandler(async (req, res) => {
   }
 });
 
-const userProfile = (req, res) => {
+const userProfile = asycHandler((req, res) => {
   res.json(req.user);
-};
+});
 
-export { getUser, userProfile, registerUser, updateUser };
+const getUsers = asycHandler(async (req, res) => {
+  const users = await Users.find({});
+  res.json(users);
+});
+
+const deleteUser = asycHandler(async (req, res) => {
+  const id = req.params.id;
+
+  const user = await Users.findById(id);
+  if (user) {
+    await user.remove();
+    res.json({ msg: "user removed" })
+  } else {
+    throw new Error('No Such User')
+  }
+});
+
+const getUserById = asycHandler(async (req, res) => {
+  const id = req.params.id;
+
+  const data = await Users.findById(id);
+
+  if (data) {
+    res.status(200).json(data);
+  } else {
+    res.status(400);
+    throw new Error('no Such user');
+  }
+})
+
+const updateByAdmin = asycHandler(async (req, res) => {
+  const id = req.params.id
+  const user = await Users.findById(id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin
+
+    const new_user = await user.save();
+
+    res.json({
+      id: new_user._id,
+      name: new_user.name,
+      email: new_user.email,
+      isAdmin: new_user.isAdmin,
+    });
+
+  } else {
+    console.log("USer error");
+    res.status(400);
+    throw new Error("No such user");
+  }
+});
+
+export { getUser, userProfile, registerUser, updateUser, getUsers, deleteUser, getUserById, updateByAdmin };

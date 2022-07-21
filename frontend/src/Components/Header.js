@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogoutAction } from "../Actions/UserActions.js";
 import { Nav, Navbar, Container, NavDropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,19 @@ const Header = () => {
                   <i className="fa-solid fa-user p-2"></i>Sign Up
                 </Nav.Link>
               )}
+              {userInfo && userInfo.isAdmin &&
+                <NavDropdown id="adminmenu" title="Admin">
+                  <NavDropdown.Item href="/admin/usersList">
+                    UsersList
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/admin/productsList">
+                    ProductsList
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/admin/ordersList">
+                    OrdersList
+                  </NavDropdown.Item>
+                </NavDropdown>
+              }
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { PayPalButton } from 'react-paypal-button-v2';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
@@ -220,10 +219,14 @@ const OrderScreen = () => {
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <SpinnerCom></SpinnerCom>}
+<<<<<<< HEAD
                   {/* {!sdkReady ? (
                     <SpinnerCom></SpinnerCom>
                   ) :  */}
                   (
+=======
+
+>>>>>>> working
                   <PayPalScriptProvider>
                     <PayPalButtons
                       onClick={(data, actions) => {
@@ -257,7 +260,11 @@ const OrderScreen = () => {
                       }}
                     />
                   </PayPalScriptProvider>
+<<<<<<< HEAD
                   )}
+=======
+
+>>>>>>> working
                 </ListGroup.Item>
               )}
             </ListGroup>
