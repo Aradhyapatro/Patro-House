@@ -3,7 +3,7 @@ import {
   userProfile,
   registerUser,
   updateUser,
-  getUsers, deleteUser, getUserById
+  getUsers, deleteUser, getUserById, updateByAdmin
 } from "../Controllers/UserControllers.js";
 import { protect, isAdmin } from "../middleware/AuthMiddleware.js";
 import express from "express";
@@ -34,14 +34,19 @@ router.route("/profile").put(protect, updateUser);
 // @route  GET /api/users/getUsers
 router.route("/getUsers").get(protect, isAdmin, getUsers);
 
-// @desc   Delete User by id
-// @access private
-// @route  GET /api/users/:id
-router.route("/:id").get(protect, isAdmin, deleteUser);
-
 // @desc   Get User by id
 // @access private
 // @route  GET /api/users/getUsers/:id
-router.route("/getUsers/:id").get(protect, isAdmin, getUserById);
+router.route("/:id").get(protect, isAdmin, getUserById);
+
+// @desc   Delete User by id
+// @access private
+// @route  GET /api/users/:id
+router.route("/:id").delete(protect, isAdmin, deleteUser);
+
+// @desc   Update User by admin
+// @access private
+// @route  GET /api/users/:id
+router.route("/:id").put(protect, isAdmin, updateByAdmin);
 
 export default router;

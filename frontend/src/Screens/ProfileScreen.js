@@ -28,7 +28,8 @@ const ProfileScreen = () => {
   const { success } = userUpdate;
 
   const myOrders = useSelector((state) => state.myOrderList);
-  const { Loading: LoadingOrders, error: errorOrders, orders: ordersMy } = myOrders
+  const { Loading: LoadingOrders, error: errorOrders, order: ordersMy } = myOrders
+  console.log(myOrders);
 
 
   useEffect(() => {
@@ -139,7 +140,7 @@ const ProfileScreen = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {ordersMy.map((order) => (
+                  {ordersMy.map((order) => (
                     <tr key={order._id}>
                       <td>{order._id}</td>
                       <td>{order.createdAt.substring(0, 10)}</td>
@@ -153,7 +154,7 @@ const ProfileScreen = () => {
                       </td>
                     </tr>
                   ))
-                  } */}
+                  }
                 </tbody >
               </Table >
             )}

@@ -85,21 +85,21 @@ export const orderListMyReducer = (
   switch (action.type) {
     case ORDER_LIST_MY_REQUEST:
       return {
-        loading: true,
+        Loading: true,
       };
     case ORDER_LIST_MY_SUCCESS:
       return {
-        loading: false,
-        orders: action.payload
+        Loading: false,
+        order: action.payload
       };
     case ORDER_LIST_MY_FAILURE:
       return {
-        loading: false,
+        Loading: false,
         error: action.payload,
       };
     case ORDER_LIST_MY_RESET:
       return {
-        orders: []
+        order: []
       }
     default:
       return state;

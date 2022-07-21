@@ -22,6 +22,10 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE,
+  USER_UPDATE_ADMIN_FAILURE,
+  USER_UPDATE_ADMIN_REQUEST,
+  USER_UPDATE_ADMIN_RESET,
+  USER_UPDATE_ADMIN_SUCCESS
 } from "../Constants/UserConstants.js";
 
 const userloginAction = (email, password) => async (dispatch) => {
@@ -244,17 +248,51 @@ const userDeleteAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
+    const { data } = await axios.delete(
       `http://localhost:5000/api/users/${id}`,
       config
     );
 
     dispatch({
       type: USER_DELETE_SUCCESS,
-      payload: data,
     });
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: USER_DELETE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+const userUpdateAdminAction = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_UPDATE_ADMIN_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.Token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `http://localhost:5000/api/users/${user._id}`, user,
+      config
+    );
+
+    dispatch({
+      type: USER_UPDATE_ADMIN_SUCCESS,
+    });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
+  } catch (error) {
     dispatch({
       type: USER_DELETE_FAILURE,
       payload:
@@ -271,5 +309,6 @@ export {
   userRegisterAction,
   userDetailsAction,
   userUpdateAction,
-  userListAction, userDeleteAction
+  userListAction,
+  userDeleteAction, userUpdateAdminAction
 };

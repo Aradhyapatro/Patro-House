@@ -112,4 +112,29 @@ const getUserById = asycHandler(async (req, res) => {
   }
 })
 
-export { getUser, userProfile, registerUser, updateUser, getUsers, deleteUser, getUserById };
+const updateByAdmin = asycHandler(async (req, res) => {
+  const id = req.params.id
+  const user = await Users.findById(id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin
+
+    const new_user = await user.save();
+
+    res.json({
+      id: new_user._id,
+      name: new_user.name,
+      email: new_user.email,
+      isAdmin: new_user.isAdmin,
+    });
+
+  } else {
+    console.log("USer error");
+    res.status(400);
+    throw new Error("No such user");
+  }
+});
+
+export { getUser, userProfile, registerUser, updateUser, getUsers, deleteUser, getUserById, updateByAdmin };
