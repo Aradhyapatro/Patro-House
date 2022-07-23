@@ -219,14 +219,6 @@ const OrderScreen = () => {
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <SpinnerCom></SpinnerCom>}
-<<<<<<< HEAD
-                  {/* {!sdkReady ? (
-                    <SpinnerCom></SpinnerCom>
-                  ) :  */}
-                  (
-=======
-
->>>>>>> working
                   <PayPalScriptProvider>
                     <PayPalButtons
                       onClick={(data, actions) => {
@@ -260,17 +252,12 @@ const OrderScreen = () => {
                       }}
                     />
                   </PayPalScriptProvider>
-<<<<<<< HEAD
-                  )}
-=======
-
->>>>>>> working
-                </ListGroup.Item>
+                </ListGroup.Item >
               )}
-            </ListGroup>
-          </Card>
-        </Col>
-      </Row>
+            </ListGroup >
+          </Card >
+        </Col >
+      </Row >
     </>
   );
 };

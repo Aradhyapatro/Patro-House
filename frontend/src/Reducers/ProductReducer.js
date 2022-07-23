@@ -8,7 +8,8 @@ import {
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_LIST_FAILURE,
   PRODUCT_LIST_REQUEEST,
-  PRODUCT_LIST_SUCCESS,
+  PRODUCT_LIST_SUCCESS, PRODUCT_UPDATE_FAILURE,
+  PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_RESET, PRODUCT_UPDATE_SUCCESS
 } from "../Constants/ProductConstants.js";
 
 export const productReducer = (state = { products: [] }, action) => {
@@ -24,7 +25,7 @@ export const productReducer = (state = { products: [] }, action) => {
   }
 };
 
-export const productDeleteReducer = (state = {}, action) => {
+export const productDeleteReducer = (state = { Loading: false }, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEEST:
       return { Loading: true };
@@ -51,3 +52,18 @@ export const productCreateReducer = (state = {}, action) => {
       return state;
   }
 };
+export const productUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_UPDATE_REQUEST:
+      return { Loading: true };
+    case PRODUCT_UPDATE_SUCCESS:
+      return { Loading: false, product: action.payload, success: true };
+    case PRODUCT_UPDATE_FAILURE:
+      return { Loading: false, error: action.payload };
+    case PRODUCT_UPDATE_RESET:
+      return { product: {} }
+    default:
+      return state;
+  }
+};
+

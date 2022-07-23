@@ -124,12 +124,6 @@ const ProfileScreen = () => {
           </Button>
         </Form>
       </Col>
-<<<<<<< HEAD
-      <Col md={9}>
-        <h2 className="Text-Center">My orders</h2>
-      </Col>
-    </Row>
-=======
       <Col md={8}>
         <h2 className="Text-Center">My orders </h2>
         {
@@ -166,7 +160,6 @@ const ProfileScreen = () => {
             )}
       </Col >
     </Row >
->>>>>>> working
   );
 };
 

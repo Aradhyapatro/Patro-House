@@ -19,18 +19,25 @@ const ProductListScreen = () => {
     const user = useSelector(state => state.userLogin)
     const { userInfo } = user
 
-    const deletePro = useSelector(state => state.ProductDeleteReducer);
+    const deletePro = useSelector(state => state.ProductDelete);
     const { Loading: LoadingProduct, success: successProduct, error: errorProduct } = deletePro;
+
+    const createPro = useSelector(state => state.ProductCreate)
+    const { Loading: LoadingProductCreate, success: successCreate, product: createdProduct, error: errorCreating } = createPro
 
     useEffect(() => {
         dispatch({ type: PRODUCT_CREATE_RESET })
-        if (userInfo && userInfo.isAdmin) {
-            dispatch(listProduct())
-        } else {
+        if (!userInfo.isAdmin) {
             navigate('/login')
         }
 
-    }, [dispatch, navigate, userInfo, successProduct])
+        if (successCreate) {
+            navigate(`/admin/product/${createdProduct._id}/edit`)
+        } else {
+            dispatch(listProduct())
+        }
+
+    }, [dispatch, navigate, userInfo, successProduct, successCreate, createdProduct])
 
     const deleteHandler = (id) => {
         // delete product
@@ -40,7 +47,7 @@ const ProductListScreen = () => {
     }
 
     const createProductHandler = () => {
-        dispatch()
+        dispatch(productCreateAction())
     }
 
     return (
@@ -57,6 +64,7 @@ const ProductListScreen = () => {
             </Row>
             <h1 className='Text-Center'>Users</h1>
             {LoadingProduct && <SpinnerCom></SpinnerCom>}
+            {LoadingProductCreate && <SpinnerCom></SpinnerCom>}
             {errorProduct && <Message message={error}></Message>}
             {
                 Loading ? <SpinnerCom></SpinnerCom> : error ? <Message message={error}></Message> :

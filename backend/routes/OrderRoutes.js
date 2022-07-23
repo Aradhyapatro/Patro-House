@@ -12,17 +12,12 @@ const router = express.Router();
 // @route  POST /api/orders
 router.route("/").post(protect, createOrder);
 
-<<<<<<< HEAD
-// @desc   Get my Orders
-// @access private
-// @route  GET /api/orders/myOrders
-router.route("/myOrders").get(protect, getMyOrders);
-=======
+
 // @desc   Get my Orders List
 // @access private
 // @route  POST /api/orders/getmyOrders
 router.route("/getMyOrders").get(protect, getMyOrders);
->>>>>>> working
+
 
 // @desc   Get the order Details by id
 // @access private

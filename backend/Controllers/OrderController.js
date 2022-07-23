@@ -58,11 +58,7 @@ export const payForOrderById = asyncHandler(async (req, res) => {
       email_address: req.body.email_address,
     };
   }
-<<<<<<< HEAD
-  console.table(myOrder)
-=======
-  console.log(myOrder);
->>>>>>> working
+
   const updateOrder = await myOrder.save();
 
   if (updateOrder) {
@@ -73,16 +69,7 @@ export const payForOrderById = asyncHandler(async (req, res) => {
 });
 
 export const getMyOrders = asyncHandler(async (req, res) => {
-<<<<<<< HEAD
-  console.log(req.user._id);
-  try {
-    const orders = await Order.find({ user: req.user._id });
-    res.json(orders);
-  } catch (error) {
-    throw new Error("Retrival issue")
-  }
-});
-=======
+
   const data = await Order.find({ user: req.user._id });
 
   if (data) {
@@ -91,4 +78,3 @@ export const getMyOrders = asyncHandler(async (req, res) => {
     throw new Error('Retrival issue')
   }
 })
->>>>>>> working

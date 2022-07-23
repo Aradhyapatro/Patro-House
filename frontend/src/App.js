@@ -15,6 +15,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import UserListScreen from './Screens/UserListScreen'
 import UserEditScreen from './Screens/UserEditScreen';
 import ProductListScreen from './Screens/ProductListScreen';
+import ProductEditScreen from './Screens/ProductEditScreen';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/admin/usersList" element={<UserListScreen />}></Route>
             <Route path="/admin/productsList" element={<ProductListScreen />}></Route>
             <Route path="/admin/user/:id/edit" element={<UserEditScreen />}></Route>
+            <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
             <Route path="/order/:id" element={<OrderScreen />}></Route>
             <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
             <Route path="/Register" element={<RegisterScreen />}></Route>
