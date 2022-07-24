@@ -13,7 +13,7 @@ import {
 import {
   orderCreateReducer,
   orderDetailsReducer,
-  orderPayReducer, orderListMyReducer
+  orderPayReducer, orderListMyReducer, orderListReducer, orderDeliverReducer
 } from "./Reducers/orderReducers";
 
 const middleWare = [thunk];
@@ -34,7 +34,9 @@ const reducers = combineReducers({
   userUpdate: userUpdateByAdminReducer,
   ProductDelete: productDeleteReducer,
   ProductCreate: productCreateReducer,
-  ProductUpdate: productUpdateReducer
+  ProductUpdate: productUpdateReducer,
+  OrdersAll: orderListReducer,
+  OrderDelivered: orderDeliverReducer
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

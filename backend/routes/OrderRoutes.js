@@ -1,9 +1,9 @@
 import {
   createOrder,
   getOrderByID,
-  payForOrderById, getMyOrders
+  payForOrderById, getMyOrders, getOrders, updateOrderToDelivered
 } from "../Controllers/OrderController.js";
-import { protect } from "../middleware/AuthMiddleware.js";
+import { protect, isAdmin } from "../middleware/AuthMiddleware.js";
 import express from "express";
 const router = express.Router();
 
@@ -12,10 +12,14 @@ const router = express.Router();
 // @route  POST /api/orders
 router.route("/").post(protect, createOrder);
 
+// @desc   get all orders
+// @access private
+// @route  POST /api/orders
+router.route("/").get(protect, isAdmin, getOrders);
 
 // @desc   Get my Orders List
 // @access private
-// @route  POST /api/orders/getmyOrders
+// @route  get /api/orders/getmyOrders
 router.route("/getMyOrders").get(protect, getMyOrders);
 
 
@@ -23,6 +27,11 @@ router.route("/getMyOrders").get(protect, getMyOrders);
 // @access private
 // @route  GET /api/orders/:id
 router.route("/:id").get(protect, getOrderByID);
+
+// @desc   to deliver by id
+// @access private
+// @route  PUT /api/orders/:id
+router.route("/:id").put(protect, isAdmin, updateOrderToDelivered);
 
 // @desc   Get the order to pay
 // @access private

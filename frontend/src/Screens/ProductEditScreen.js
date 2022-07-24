@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Spinner } from "react-bootstrap";
@@ -16,6 +17,7 @@ const ProductEditScreen = () => {
     const [category, setCategory] = useState('');
     const [countInStock, setCountInStock] = useState(0);
     const [description, setDescription] = useState('');
+    const [uploading, setUploading] = useState(false);
 
     const [searchParam, setSearchParam] = useSearchParams();
 
@@ -49,6 +51,29 @@ const ProductEditScreen = () => {
             }
         }
     }, [id, dispatch, product, navigate, successUpdate]);
+
+    const uploadFileHandler = async (e) => {
+        console.log("here");
+        const file = e.target.file;
+        const fileData = new FormData();
+        fileData.append('image', file);
+        setUploading(true);
+
+        try {
+            const config = {
+                headers: {
+                    "Content-type": "multipart/form-data"
+                }
+            }
+
+            const { data } = await axios.post('http://localhost:5000/api/uploads', fileData, config);
+            setImage(data);
+            setUploading(false);
+        } catch (error) {
+            console.log(error);
+            setUploading(false);
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -112,6 +137,10 @@ const ProductEditScreen = () => {
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
                         ></Form.Control>
+                        <br />
+                        <Form.Control id="image-file" type="file" label="chose a file" onChange={uploadFileHandler} />
+                        {/* <Form.File id='image-file' label="choose a file" custom onChange={uploadFileHandler}></Form.File> */}
+                        {uploading && <Spinner></Spinner>}
                     </Form.Group>
 
                     <Form.Group id="Brand">

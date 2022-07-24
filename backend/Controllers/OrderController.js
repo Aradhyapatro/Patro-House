@@ -78,3 +78,31 @@ export const getMyOrders = asyncHandler(async (req, res) => {
     throw new Error('Retrival issue')
   }
 })
+
+export const getOrders = asyncHandler(async (req, res) => {
+
+  const data = await Order.find({}).populate('user', 'id name');
+
+  if (data) {
+    res.status(200).json(data);
+  } else {
+    throw new Error('Retrival issue')
+  }
+})
+
+export const updateOrderToDelivered = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const myOrder = await Order.findById(id);
+  if (myOrder) {
+    myOrder.iDelivered = true;
+    myOrder.deliveredAt = Date.now();
+  }
+
+  const updateOrder = await myOrder.save();
+
+  if (updateOrder) {
+    res.status(200).json(updateOrder);
+  } else {
+    throw new Error("Could not deliver");
+  }
+});

@@ -22,7 +22,7 @@ db();
 app.use("/api/products", productRoutes);
 app.use("/api/users/", userRoute);
 app.use("/api/orders", orderRoute);
-app.use("/api/uploads", uploadRoute);
+app.use("/api/uploads/", uploadRoute);
 
 
 app.get("/api/config/paypal", (req, res) => {
