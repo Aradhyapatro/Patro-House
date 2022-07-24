@@ -22,16 +22,15 @@ router.route("/").get(protect, isAdmin, getOrders);
 // @route  get /api/orders/getmyOrders
 router.route("/getMyOrders").get(protect, getMyOrders);
 
+// @desc   to deliver by id
+// @access private
+// @route  PUT /api/orders/:id
+router.route("/:id").put(protect, isAdmin, updateOrderToDelivered);
 
 // @desc   Get the order Details by id
 // @access private
 // @route  GET /api/orders/:id
 router.route("/:id").get(protect, getOrderByID);
-
-// @desc   to deliver by id
-// @access private
-// @route  PUT /api/orders/:id
-router.route("/:id").put(protect, isAdmin, updateOrderToDelivered);
 
 // @desc   Get the order to pay
 // @access private

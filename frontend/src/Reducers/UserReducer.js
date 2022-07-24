@@ -108,6 +108,8 @@ const userUpdateProfileReducer = (
         Loading: false,
         error: action.payload,
       };
+    case USER_UPDATE_RESET:
+      return {}
     default:
       return state;
   }

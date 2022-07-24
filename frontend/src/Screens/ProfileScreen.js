@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { orderListMyAction } from '../Actions/OrderActions';
 import SpinnerCom from "../Components/SpinnerCom";
 import { LinkContainer } from 'react-router-bootstrap';
+import { USER_UPDATE_RESET } from '../Constants/UserConstants';
 
 const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -36,7 +37,8 @@ const ProfileScreen = () => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      if (!user || !user.name) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_RESET })
         dispatch(userDetailsAction("profile"));
         dispatch(orderListMyAction());
         console.log("Done");
@@ -45,7 +47,7 @@ const ProfileScreen = () => {
         setEmail(user.email);
       }
     }
-  }, [navigate, dispatch, userInfo, user]);
+  }, [navigate, dispatch, userInfo, user, success]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

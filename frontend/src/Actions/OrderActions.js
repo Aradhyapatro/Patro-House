@@ -210,11 +210,15 @@ export const orderDeliverAction =
           "Authorization": `Bearer ${userInfo.Token}`,
         },
       };
-
-      console.log(config);
+      console.log(config, "config");
       const { data } = await axios.put(
         `http://localhost:5000/api/orders/${id}`,
-        config
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${userInfo.Token}`,
+          }
+        }
       );
 
       dispatch({
@@ -231,4 +235,3 @@ export const orderDeliverAction =
       });
     }
   };
-
