@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_DB);
+    const conn = await mongoose.connect(process.env.MONGO_DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    })
 
     console.log(`The site is connect to ${conn.connection.host}`.cyan);
   } catch (error) {

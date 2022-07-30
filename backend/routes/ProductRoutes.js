@@ -1,6 +1,6 @@
 import {
   getProducts,
-  getProductsById, deleteProductsById, createProduct, UpdateProduct
+  getProductsById, deleteProductsById, createProduct, UpdateProduct, CreateNewReview
 } from "../Controllers/ProductControllers.js";
 import express from "express";
 import { protect, isAdmin } from '../middleware/AuthMiddleware.js';
@@ -30,5 +30,10 @@ router.route("/:id").get(getProductsById);
 // @access private
 // @route  delete /api/products/:id
 router.route("/:id").delete(protect, isAdmin, deleteProductsById);
+
+// @desc   delete a product by the id given in the params
+// @access private
+// @route  delete /api/products/:id
+router.route("/:id/reviews").post(protect, CreateNewReview);
 
 export default router;

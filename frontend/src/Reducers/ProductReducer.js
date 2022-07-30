@@ -9,7 +9,7 @@ import {
   PRODUCT_LIST_FAILURE,
   PRODUCT_LIST_REQUEEST,
   PRODUCT_LIST_SUCCESS, PRODUCT_UPDATE_FAILURE,
-  PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_RESET, PRODUCT_UPDATE_SUCCESS
+  PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_RESET, PRODUCT_UPDATE_SUCCESS, PRODUCT_CREATE_REVIEW_FAILURE, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_RESET, PRODUCT_CREATE_REVIEW_SUCCESS
 } from "../Constants/ProductConstants.js";
 
 export const productReducer = (state = { products: [] }, action) => {
@@ -52,6 +52,7 @@ export const productCreateReducer = (state = {}, action) => {
       return state;
   }
 };
+
 export const productUpdateReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_UPDATE_REQUEST:
@@ -62,6 +63,21 @@ export const productUpdateReducer = (state = {}, action) => {
       return { Loading: false, error: action.payload };
     case PRODUCT_UPDATE_RESET:
       return { product: {} }
+    default:
+      return state;
+  }
+};
+
+export const productCreateReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_CREATE_REVIEW_REQUEST:
+      return { Loading: true };
+    case PRODUCT_CREATE_REVIEW_SUCCESS:
+      return { Loading: false, success: true };
+    case PRODUCT_CREATE_REVIEW_FAILURE:
+      return { Loading: false, error: action.payload };
+    case PRODUCT_CREATE_REVIEW_RESET:
+      return {}
     default:
       return state;
   }

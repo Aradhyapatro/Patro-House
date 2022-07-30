@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import path from 'path'
+import morgan from 'morgan';
 import products from "./data/products.js";
 import colors from "colors";
 import cors from "cors";
@@ -31,6 +32,12 @@ app.get("/api/config/paypal", (req, res) => {
 
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+if (process.env.NODE_ENVIRONMENT === 'Development') {
+  console.log("MOrgen");
+  app.use(morgan('common'));
+}
+
 
 // Error Handler middlewares
 app.use(notFound);
