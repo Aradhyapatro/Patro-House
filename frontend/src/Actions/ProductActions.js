@@ -5,11 +5,11 @@ import {
   PRODUCT_LIST_SUCCESS, PRODUCT_DELETE_FAILURE, PRODUCT_DELETE_REQUEEST, PRODUCT_DELETE_SUCCESS, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_FAILURE, PRODUCT_UPDATE_SUCCESS, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAILURE
 } from "../Constants/ProductConstants.js";
 
-export const listProduct = () => async (dispatch) => {
+export const listProduct = (keyword = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEEST });
 
-    const { data } = await axios.get("/api/products");
+    const { data } = await axios.get(`/api/products?keyword=${keyword}`);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {

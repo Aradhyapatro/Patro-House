@@ -50,7 +50,8 @@ const Product = () => {
     dispatch(productDetails(url));
   }, [dispatch, url, successReview]);
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     dispatch(producCreateReviewAction(url, { rating, comment }))
   }
 

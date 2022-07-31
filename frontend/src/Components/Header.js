@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogoutAction } from "../Actions/UserActions.js";
 import { Nav, Navbar, Container, NavDropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ const Header = () => {
           <Navbar.Brand href="/">Patro-House</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            <SearchBox></SearchBox>
             <Nav className="ms-auto">
               <Nav.Link href="/cart/">
                 <i className="fa-solid fa-cart-shopping p-2"></i>Cart
@@ -60,6 +61,7 @@ const Header = () => {
                 </NavDropdown>
               }
             </Nav>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>

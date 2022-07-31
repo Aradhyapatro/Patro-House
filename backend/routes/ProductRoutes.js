@@ -8,7 +8,7 @@ const router = express.Router();
 
 // @desc   gets all the products data
 // @access public
-// @route    GET /api/products/
+// @route    GET /api/products?keyword
 router.route("/").get(getProducts)
 
 // @desc   create a product data

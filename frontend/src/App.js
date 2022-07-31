@@ -27,27 +27,26 @@ function App() {
         <Header />
 
         {/* Main */}
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/payment" element={<PaymentScreen />}></Route>
-            <Route path="/Shipping" element={<ShippingScreen />}></Route>
-            <Route path="/admin/usersList" element={<UserListScreen />}></Route>
-            <Route path="/admin/productsList" element={<ProductListScreen />}></Route>
-            <Route path="/admin/ordersList" element={<OrderListScreen />}></Route>
-            <Route path="/admin/user/:id/edit" element={<UserEditScreen />}></Route>
-            <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
-            <Route path="/order/:id" element={<OrderScreen />}></Route>
-            <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
-            <Route path="/Register" element={<RegisterScreen />}></Route>
-            <Route path="/login" element={<LoginScreen />}></Route>
-            <Route path="/login?" element={<LoginScreen />}></Route>
-            <Route path="/products/:id" element={<Product />}></Route>
-            <Route path="/cart/:id" element={<CartScreen />}></Route>
-            <Route path="/cart/" element={<CartScreen />}></Route>
-            <Route path="/profile" element={<ProfileScreen />}></Route>
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/search/:keyword" element={<Main />}></Route>
+          <Route path="/payment" element={<PaymentScreen />}></Route>
+          <Route path="/Shipping" element={<ShippingScreen />}></Route>
+          <Route path="/admin/usersList" element={<UserListScreen />}></Route>
+          <Route path="/admin/productsList" element={<ProductListScreen />}></Route>
+          <Route path="/admin/ordersList" element={<OrderListScreen />}></Route>
+          <Route path="/admin/user/:id/edit" element={<UserEditScreen />}></Route>
+          <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
+          <Route path="/order/:id" element={<OrderScreen />}></Route>
+          <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
+          <Route path="/Register" element={<RegisterScreen />}></Route>
+          <Route path="/login" element={<LoginScreen />}></Route>
+          <Route path="/login?" element={<LoginScreen />}></Route>
+          <Route path="/products/:id" element={<Product />}></Route>
+          <Route path="/cart/:id" element={<CartScreen />}></Route>
+          <Route path="/cart/" element={<CartScreen />}></Route>
+          <Route path="/profile" element={<ProfileScreen />}></Route>
+        </Routes>
 
         {/* Footer */}
         <Footer />
