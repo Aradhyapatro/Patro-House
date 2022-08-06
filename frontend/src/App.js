@@ -29,6 +29,8 @@ function App() {
         {/* Main */}
         <Routes>
           <Route path="/" element={<Main />}></Route>
+          <Route path="/page/:pageNumber" element={<Main />}></Route>
+          <Route path="/search/:keyword/page/:pageNumber" element={<Main />}></Route>
           <Route path="/search/:keyword" element={<Main />}></Route>
           <Route path="/payment" element={<PaymentScreen />}></Route>
           <Route path="/Shipping" element={<ShippingScreen />}></Route>

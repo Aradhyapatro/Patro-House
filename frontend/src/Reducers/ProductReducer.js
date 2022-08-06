@@ -1,4 +1,6 @@
 import {
+  PRODUCT_TOP_REQUEST,
+  PRODUCT_TOP_FAILURE, PRODUCT_TOP_SUCCESS,
   PRODUCT_CREATE_FAILURE,
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_RESET,
@@ -17,7 +19,7 @@ export const productReducer = (state = { products: [] }, action) => {
     case PRODUCT_LIST_REQUEEST:
       return { Loading: true, products: [] };
     case PRODUCT_LIST_SUCCESS:
-      return { Loading: false, products: action.payload };
+      return { Loading: false, products: action.payload.productsData, page: action.payload.page, pages: action.payload.pages };
     case PRODUCT_LIST_FAILURE:
       return { Loading: false, error: action.payload };
     default:
@@ -83,3 +85,15 @@ export const productCreateReviewReducer = (state = {}, action) => {
   }
 };
 
+export const productTopRatedReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_TOP_REQUEST:
+      return { Loading: true, products: [] };
+    case PRODUCT_TOP_SUCCESS:
+      return { Loading: false, products: action.payload };
+    case PRODUCT_TOP_FAILURE:
+      return { Loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};

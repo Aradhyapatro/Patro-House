@@ -1,6 +1,6 @@
 import {
-  getProducts,
-  getProductsById, deleteProductsById, createProduct, UpdateProduct, CreateNewReview
+  getProducts, getTopProducts,
+  getProductsById, deleteProductsById, createProduct, UpdateProduct, CreateNewReview,
 } from "../Controllers/ProductControllers.js";
 import express from "express";
 import { protect, isAdmin } from '../middleware/AuthMiddleware.js';
@@ -15,6 +15,11 @@ router.route("/").get(getProducts)
 // @access public
 // @route    Post /api/products/
 router.route("/").post(protect, isAdmin, createProduct);
+
+// @desc   get top product data
+// @access public
+// @route    GET /api/products/
+router.route("/top").get(getTopProducts);
 
 // @desc   edit a products data by id
 // @access public

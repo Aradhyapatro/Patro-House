@@ -2,14 +2,20 @@ import products from "../models/ProductModel.js";
 import asyncHandler from "express-async-handler";
 
 const getProducts = asyncHandler(async (req, res) => {
-  const query = req.query.keyword ? {
+  const pageSize = 4;
+  const page = Number(req.query.page) || 1;
+  const keyword = req.query.keyword ? {
     name: {
       $regex: req.query.keyword,
       $options: 'i'
     }
   } : {};
-  const productsData = await products.find(query);
-  res.json(productsData);
+
+  const count = await products.countDocuments({ ...keyword });
+  const productsData = await products.find(keyword).limit(pageSize).skip(pageSize * (page - 1));
+
+
+  res.json({ productsData, page, pages: Math.ceil(count / pageSize) });
 });
 
 const getProductsById = asyncHandler(async (req, res) => {
@@ -117,4 +123,15 @@ const CreateNewReview = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductsById, deleteProductsById, createProduct, UpdateProduct, CreateNewReview };
+const getTopProducts = asyncHandler(async (req, res) => {
+
+  const top = await products.find({}).sort({ rating: -1 }).limit(3)
+
+  if (top) {
+    res.status(201).json(top);
+  } else {
+    res.status(404).json({ msg: "Could not find the top products" })
+  }
+});
+
+export { getTopProducts, getProducts, getProductsById, deleteProductsById, createProduct, UpdateProduct, CreateNewReview };

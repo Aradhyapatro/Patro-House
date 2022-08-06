@@ -16,8 +16,8 @@ const SearchBox = () => {
     }
 
     return (
-        <Form onSubmit={submitHandle} inline>
-            <Form.Control type='text' name='q' onChange={(e) => setKeyword(e.target.value)} placeHolder='Search for Product...' className='mr-sm-2 ml-sm-5'></Form.Control>
+        <Form onSubmit={submitHandle} inline="true" >
+            <Form.Control type='text' name='q' onChange={(e) => setKeyword(e.target.value)} placeholder='Search for Product...' className='mr-sm-2 ml-sm-5'></Form.Control>
             <Button type='submit' varient='outline-success' className='p-2'>
                 Search
             </Button>
