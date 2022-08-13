@@ -27,7 +27,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(listProduct(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber, productList]);
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <>
@@ -43,11 +43,6 @@ const Main = () => {
           <Message variant="danger" message={error}></Message>
         ) : (
           <div>
-            <Paginate page={page} pages={pages} keyword={keyword ? keyword : ''} />
-            <Paginate page={page} pages={pages} keyword={keyword ? keyword : ''} />
-            <Paginate page={page} pages={pages} keyword={keyword ? keyword : ''} />
-            <Paginate page={page} pages={pages} keyword={keyword ? keyword : ''} />
-
             <Row>
               {products.map((product, index) => {
                 return (
