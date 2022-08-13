@@ -41,7 +41,7 @@ const OrderScreen = () => {
   const { userInfo } = userLog;
 
   const orderDelivery = useSelector((state) => state.OrderDelivered);
-  const { success: successDeliver, Loading: LoadingDeliver, error: errorDeliver } = orderDetails;
+  const { success: successDeliver, Loading: LoadingDeliver, error: errorDeliver } = orderDelivery;
 
   const orderPay = useSelector((state) => state.orderPay);
 

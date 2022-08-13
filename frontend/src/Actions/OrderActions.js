@@ -210,17 +210,12 @@ export const orderDeliverAction =
           "Authorization": `Bearer ${userInfo.Token}`,
         },
       };
-      console.log(config, "config");
-      const { data } = await axios.put(
-        `http://localhost:5000/api/orders/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${userInfo.Token}`,
-          }
-        }
+      console.log(config.headers, "config");
+      const { data } = await axios.get(
+        `http://localhost:5000/api/orders/${id}/deliver`,
+        config
       );
-
+      console.log(data);
       dispatch({
         type: ORDER_DELIVER_SUCCESS,
         payload: data,

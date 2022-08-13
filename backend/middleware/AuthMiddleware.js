@@ -3,6 +3,7 @@ import User from "../models/UserModel.js";
 import asyncHandler from "express-async-handler";
 
 const protect = asyncHandler(async (req, res, next) => {
+  console.log("Aradhya", req.headers);
   let token;
   if (
     req.headers.authorization &&
@@ -23,6 +24,7 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 const isAdmin = asyncHandler((req, res, next) => {
+
   if (req.user && req.user.isAdmin) {
     next();
   } else {
