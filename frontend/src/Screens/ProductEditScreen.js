@@ -139,7 +139,6 @@ const ProductEditScreen = () => {
                         ></Form.Control>
                         <br />
                         <Form.Control id="image-file" type="file" label="chose a file" onChange={uploadFileHandler} />
-                        {/* <Form.File id='image-file' label="choose a file" custom onChange={uploadFileHandler}></Form.File> */}
                         {uploading && <Spinner></Spinner>}
                     </Form.Group>
 

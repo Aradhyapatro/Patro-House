@@ -16,7 +16,6 @@ const Main = () => {
   const { keyword } = useParams();
   let { pageNumber } = useParams();
   const dispatch = useDispatch();
-  console.log(pageNumber + "page");
 
   if (pageNumber == null) {
     pageNumber = 1;
@@ -24,7 +23,7 @@ const Main = () => {
 
   const productList = useSelector((state) => state.productList);
   const { Loading, error, products, page, pages } = productList;
-
+  console.log("Home ", page, pages);
   useEffect(() => {
     dispatch(listProduct(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
@@ -42,7 +41,7 @@ const Main = () => {
         ) : error ? (
           <Message variant="danger" message={error}></Message>
         ) : (
-          <div>
+          <>
             <Row>
               {products.map((product, index) => {
                 return (
@@ -52,9 +51,8 @@ const Main = () => {
                 );
               })}
             </Row>
-            asdasd
-            {/* <Paginate page={3} pages={4} keyword={keyword ? keyword : ''} /> */}
-          </div>
+            <Paginate Page="2" Pages="3" keyword={keyword ? keyword : ''} />
+          </>
         )}
       </Container>
     </>
