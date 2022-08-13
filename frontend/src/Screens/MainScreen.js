@@ -23,7 +23,6 @@ const Main = () => {
 
   const productList = useSelector((state) => state.productList);
   const { Loading, error, products, page, pages } = productList;
-  console.log("Home ", page, pages);
   useEffect(() => {
     dispatch(listProduct(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
@@ -51,7 +50,7 @@ const Main = () => {
                 );
               })}
             </Row>
-            <Paginate Page="2" Pages="3" keyword={keyword ? keyword : ''} />
+            <Paginate Page={page} Pages={pages} keyword={keyword ? keyword : ''} />
           </>
         )}
       </Container>

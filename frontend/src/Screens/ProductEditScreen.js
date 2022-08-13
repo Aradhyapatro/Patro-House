@@ -66,7 +66,6 @@ const ProductEditScreen = () => {
             }
 
             const { data } = await axios.post('http://localhost:5000/api/uploads', fileData, config);
-            console.log(data);
             setImage(data);
             setUploading(false);
         } catch (error) {

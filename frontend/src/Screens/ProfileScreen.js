@@ -30,7 +30,6 @@ const ProfileScreen = () => {
 
   const myOrders = useSelector((state) => state.myOrderList);
   const { Loading: LoadingOrders, error: errorOrders, order: ordersMy } = myOrders
-  console.log(myOrders);
 
 
   useEffect(() => {
@@ -41,7 +40,6 @@ const ProfileScreen = () => {
         dispatch({ type: USER_UPDATE_RESET })
         dispatch(userDetailsAction("profile"));
         dispatch(orderListMyAction());
-        console.log("Done");
       } else {
         setName(user.name);
         setEmail(user.email);

@@ -41,7 +41,6 @@ const Product = () => {
 
   useEffect(() => {
     if (successReview === true) {
-      console.log("here");
       alert('Your Review was added');
       setRating(0);
       setComment('');
