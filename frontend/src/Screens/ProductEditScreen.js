@@ -53,8 +53,7 @@ const ProductEditScreen = () => {
     }, [id, dispatch, product, navigate, successUpdate]);
 
     const uploadFileHandler = async (e) => {
-        console.log("here");
-        const file = e.target.file;
+        const file = e.target.files[0];
         const fileData = new FormData();
         fileData.append('image', file);
         setUploading(true);
@@ -67,6 +66,7 @@ const ProductEditScreen = () => {
             }
 
             const { data } = await axios.post('http://localhost:5000/api/uploads', fileData, config);
+            console.log(data);
             setImage(data);
             setUploading(false);
         } catch (error) {
