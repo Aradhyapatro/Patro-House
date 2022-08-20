@@ -15,7 +15,6 @@ const ProductListScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const pageNumber = useParams().pageNumber || 1;
-    console.log(pageNumber);
 
     const list = useSelector(state => state.productList)
     const { Loading, products, error, page, pages } = list
