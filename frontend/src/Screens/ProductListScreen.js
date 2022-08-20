@@ -8,13 +8,18 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { listProduct, productDeleteAction, productCreateAction } from '../Actions/ProductActions';
 import { PRODUCT_CREATE_RESET } from "../Constants/ProductConstants.js"
+import Paginate from '../Components/Paginate.js';
+import { useParams } from 'react-router-dom';
 
 const ProductListScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const pageNumber = useParams().pageNumber || 1;
+    console.log(pageNumber);
 
     const list = useSelector(state => state.productList)
-    const { Loading, products, error } = list
+    const { Loading, products, error, page, pages } = list
+    console.log(page, pages, "here");
 
     const user = useSelector(state => state.userLogin)
     const { userInfo } = user
@@ -34,7 +39,7 @@ const ProductListScreen = () => {
         if (successCreate) {
             navigate(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            dispatch(listProduct())
+            dispatch(listProduct('', pageNumber))
         }
 
     }, [dispatch, navigate, userInfo, successProduct, successCreate, createdProduct])
@@ -53,8 +58,7 @@ const ProductListScreen = () => {
     return (
         <>
             <Row className='align-items-center'>
-                <Col className='mx-4'>
-                    <h1>Products</h1>
+                <Col className='m-5 Text-Center'>
                 </Col>
                 <Col className='text-right mx-4'>
                     <Button style={{ marginLeft: 'auto', display: 'block', }} onClick={createProductHandler}>
@@ -62,51 +66,54 @@ const ProductListScreen = () => {
                     </Button>
                 </Col>
             </Row>
-            <h1 className='Text-Center'>Users</h1>
+            <h1 className='Text-Center'>Products</h1>
             {LoadingProduct && <SpinnerCom></SpinnerCom>}
             {LoadingProductCreate && <SpinnerCom></SpinnerCom>}
             {errorProduct && <Message message={error}></Message>}
             {
                 Loading ? <SpinnerCom></SpinnerCom> : error ? <Message message={error}></Message> :
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Category</th>
-                                <th>Brand</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                products.map(product => (
-                                    <tr key={product._id}>
-                                        <td>{product._id}</td>
-                                        <td>{product.name}</td>
-                                        <td>${product.price}</td>
-                                        <td>
-                                            {product.category}
-                                        </td>
-                                        <td>{product.brand}</td>
-                                        <td>
-                                            <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                                                <Button varient='light' className='btn-sm'>
-                                                    <i className="fas fa-edit"></i>
-                                                </Button>
-                                            </LinkContainer>
+                    <>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                    <th>Brand</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    products.map(product => (
+                                        <tr key={product._id}>
+                                            <td>{product._id}</td>
+                                            <td>{product.name}</td>
+                                            <td>${product.price}</td>
+                                            <td>
+                                                {product.category}
+                                            </td>
+                                            <td>{product.brand}</td>
+                                            <td>
+                                                <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                                                    <Button varient='light' className='btn-sm'>
+                                                        <i className="fas fa-edit"></i>
+                                                    </Button>
+                                                </LinkContainer>
 
-                                        </td>
-                                        <td>
-                                            <Button varient="danger" className="btn-sm padding" onClick={() => { deleteHandler(product._id) }}>
-                                                <i className='fas fa-trash'></i>
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </Table>
+                                            </td>
+                                            <td>
+                                                <Button varient="danger" className="btn-sm padding" onClick={() => { deleteHandler(product._id) }}>
+                                                    <i className='fas fa-trash'></i>
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </Table>
+                        <Paginate Page={page} Pages={pages} />
+                    </>
             }
         </>
     )
