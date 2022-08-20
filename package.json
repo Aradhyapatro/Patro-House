@@ -5,12 +5,12 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon ./backend/server.js",
+    "start": "nodemon ./backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "importData": "nodemon ./backend/seeder.js",
     "deleteData": "nodemon ./backend/seeder.js d",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Aradhya Patro a.k.a Arya",
   "license": "ISC",
