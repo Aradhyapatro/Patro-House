@@ -31,7 +31,7 @@ const Main = () => {
     <>
       <Meta />
       <Container>
-        {!keyword ? <Carousel></Carousel> : <>            <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
+        {!keyword ? <Carousel></Carousel> : <><Link to="/" style={{ all: "unset", cursor: "pointer" }}>
           <p className="btn btn-light my-3">Go Back</p>
         </Link></>}
         <h1 className='Text-Center'>Products</h1>
