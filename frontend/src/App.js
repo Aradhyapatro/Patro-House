@@ -42,7 +42,8 @@ function App() {
           <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
           <Route path="/order/:id" element={<OrderScreen />}></Route>
           <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
-          <Route path="/Register" element={<RegisterScreen />}></Route>
+          <Route path="/register" element={<RegisterScreen />}></Route>
+          <Route path="/register?" element={<RegisterScreen />}></Route>
           <Route path="/login" element={<LoginScreen />}></Route>
           <Route path="/login?" element={<LoginScreen />}></Route>
           <Route path="/products/:id" element={<Product />}></Route>

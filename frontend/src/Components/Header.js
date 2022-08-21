@@ -29,7 +29,7 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <SearchBox></SearchBox>
             <Nav className="ms-auto">
-              <Nav.Link href="/cart">
+              <Nav.Link href="http://localhost:5000/cart">
                 <i className="fa-solid fa-cart-shopping p-2"></i>Cart
               </Nav.Link>
 

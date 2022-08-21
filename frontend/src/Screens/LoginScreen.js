@@ -73,7 +73,7 @@ const LoginScreen = () => {
             New Customer :
             <Link
               to={
-                redirect !== "/" ? `register?redirect=${redirect}` : "/register"
+                redirect !== "/" ? `/register?redirect=${redirect}` : "/register"
               }
             >
               Register
