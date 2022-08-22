@@ -185,7 +185,9 @@ export const productTopRatedAction = () => async (dispatch) => {
     dispatch({
       type: PRODUCT_TOP_FAILURE,
       payload:
-        error
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 }
