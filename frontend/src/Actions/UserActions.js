@@ -298,7 +298,7 @@ const userUpdateAdminAction = (user) => async (dispatch, getState) => {
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
-      type: USER_DELETE_FAILURE,
+      type: USER_UPDATE_ADMIN_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
