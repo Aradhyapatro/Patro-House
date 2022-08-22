@@ -66,6 +66,7 @@ const ProductEditScreen = () => {
             }
 
             const { data } = await axios.post('http://localhost:5000/api/uploads', fileData, config);
+            console.log(data);
             setImage(data);
             setUploading(false);
         } catch (error) {
@@ -135,6 +136,7 @@ const ProductEditScreen = () => {
                             placeholder='Enter Image URL'
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
+                            id="image-file"
                         ></Form.Control>
                         <br />
                         <Form.Control id="image-file" type="file" label="chose a file" onChange={uploadFileHandler} />

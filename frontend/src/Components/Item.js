@@ -7,7 +7,7 @@ const Item = ({ product }) => {
   return (
     <>
       <Card key={product._id} className="m-3 card rounded">
-        <Link to={`products/${product._id}`}>
+        <Link to={`/products/${product._id}`}>
           <Card.Img
             src={product.image}
             className="img-fluid"
@@ -16,7 +16,7 @@ const Item = ({ product }) => {
           ></Card.Img>
         </Link>
         <Card.Body>
-          <Link to={`/${product._id}`} style={{ all: "unset" }}>
+          <Link to={`/products/${product._id}`} style={{ all: "unset" }}>
             <Card.Title>{product.name}</Card.Title>
           </Link>
 
