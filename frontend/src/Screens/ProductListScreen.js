@@ -18,7 +18,6 @@ const ProductListScreen = () => {
 
     const list = useSelector(state => state.productList)
     const { Loading, products, error, page, pages } = list
-    console.log(page, pages, "here");
 
     const user = useSelector(state => state.userLogin)
     const { userInfo } = user
@@ -31,7 +30,7 @@ const ProductListScreen = () => {
 
     useEffect(() => {
         dispatch({ type: PRODUCT_CREATE_RESET })
-        if (!userInfo.isAdmin) {
+        if (!userInfo || !userInfo.isAdmin) {
             navigate('/login')
         }
 
@@ -111,7 +110,7 @@ const ProductListScreen = () => {
                                 }
                             </tbody>
                         </Table>
-                        <Paginate Page={page} Pages={pages} />
+                        <Paginate Page={page} Pages={pages} isAdmin={true} />
                     </>
             }
         </>
