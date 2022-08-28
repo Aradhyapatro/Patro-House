@@ -36,7 +36,7 @@ export const orderCreateAction = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/orders`,
+      `/api/orders`,
       order,
       config
     );
@@ -72,7 +72,7 @@ export const orderDetailsAction = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/orders/${id}`,
+      `/api/orders/${id}`,
       config
     );
 
@@ -103,7 +103,7 @@ export const orderPayAction =
       };
       console.log("Paying to backend", config);
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/${orderId}/pay`,
+        `/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -140,7 +140,7 @@ export const orderListMyAction =
       };
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/getMyOrders`,
+        `/api/orders/getMyOrders`,
         config
       );
 
@@ -176,7 +176,7 @@ export const orderListAction =
       };
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/`,
+        `/api/orders/`,
         config
       );
 
@@ -212,7 +212,7 @@ export const orderDeliverAction =
       };
       console.log(config.headers, "config");
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/${id}/deliver`,
+        `/api/orders/${id}/deliver`,
         config
       );
       console.log(data);

@@ -39,7 +39,7 @@ const userloginAction = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/users/login",
+      "/api/users/login",
       { email, password },
       config
     );
@@ -72,7 +72,7 @@ const userRegisterAction = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/users",
+      "/api/users",
       {
         name,
         email,
@@ -136,7 +136,7 @@ const userDetailsAction = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/users/${id}`,
+      `/api/users/${id}`,
       config
     );
 
@@ -176,7 +176,7 @@ const userUpdateAction = (user) => async (dispatch, getState) => {
     console.log(userInfo.Token);
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/users/profile`,
+      `/api/users/profile`,
       user,
       config
     );
@@ -217,7 +217,7 @@ const userListAction = () => async (dispatch, getState) => {
     };
     console.log("Start");
     const { data } = await axios.get(
-      `http://localhost:5000/api/users/getUsers`,
+      `/api/users/getUsers`,
       config
     );
     console.log("data", data);
@@ -253,7 +253,7 @@ const userDeleteAction = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `http://localhost:5000/api/users/${id}`,
+      `/api/users/${id}`,
       config
     );
 
@@ -288,7 +288,7 @@ const userUpdateAdminAction = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/users/${user._id}`, user,
+      `/api/users/${user._id}`, user,
       config
     );
 

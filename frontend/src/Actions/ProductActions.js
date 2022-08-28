@@ -39,7 +39,7 @@ export const productDeleteAction = (id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `http://localhost:5000/api/products/${id}`,
+      `/api/products/${id}`,
       config
     );
 
@@ -73,7 +73,7 @@ export const productCreateAction = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/products/`, {},
+      `/api/products/`, {},
       config
     );
 
@@ -108,7 +108,7 @@ export const producUpdateAction = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/products/${product._id}`, product,
+      `/api/products/${product._id}`, product,
       config
     );
 
@@ -143,7 +143,7 @@ export const producCreateReviewAction = (productId, review) => async (dispatch, 
     };
 
     await axios.post(
-      `http://localhost:5000/api/products/${productId}/reviews`, review,
+      `/api/products/${productId}/reviews`, review,
       config
     );
 
@@ -172,7 +172,7 @@ export const productTopRatedAction = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/products/top`,
+      `/api/products/top`,
       config
     );
 
